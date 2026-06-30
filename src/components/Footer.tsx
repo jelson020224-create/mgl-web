@@ -11,7 +11,7 @@ export default function Footer({ settings }: FooterProps) {
   return (
     <footer className="relative bg-warm-gray overflow-hidden border-t border-white/[0.07]">
 
-      <div className="section-container py-[clamp(4rem,6vw,6rem)]">
+      <div className="section-container pt-[10cm] pb-[clamp(4rem,6vw,6rem)]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[clamp(2rem,3vw,3rem)]">
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-5">
