@@ -99,6 +99,8 @@ export default function Footer({ settings }: FooterProps) {
             <Link href="/privacy" className="text-xs text-gray/40 hover:text-white/60 transition-colors">Privacy</Link>
             <span className="w-1 h-1 rounded-full bg-terracotta/50" />
             <Link href="/privacy#cookies" className="text-xs text-gray/40 hover:text-white/60 transition-colors">Cookies</Link>
+            <span className="w-1 h-1 rounded-full bg-terracotta/50" />
+            <Link href="/admin/login" className="text-xs text-gray/40 hover:text-white/60 transition-colors">Admin</Link>
           </div>
         </div>
       </div>
