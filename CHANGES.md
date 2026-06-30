@@ -33,3 +33,8 @@
   - Deletes client + clears session + redirects on success
 - **`src/app/dashboard/account-danger.tsx`** — client component with confirmation flow
 - **`src/app/dashboard/page.tsx`** — added `AccountDanger` component at bottom
+
+### Button Fixes (globals.css)
+- Made `btn-primary`, `btn-secondary`, `btn-outline`, `btn-ghost` **self-contained** — each now has inline-flex, padding, font-size, border-radius, border, line-height, transition, cursor
+- Previously they depended on `.btn` base class for padding/font-size/display; 15+ buttons across the site used them standalone and rendered as tiny unstyled squares
+- Root cause: track search button, track password submit, media upload, portfolio form, services form, samples form, settings form, edit/new project forms, testimonials add/edit forms all lacked `.btn` class
