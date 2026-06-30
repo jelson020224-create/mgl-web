@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react'
 import { adminLogin } from './actions'
-import { BrandMark } from '@/components/brand-mark'
+import { SiteLogo } from '@/components/site-logo'
 
 const initialState = { error: '' }
 
@@ -17,7 +17,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm relative">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-5">
-            <BrandMark size={48} variant="admin" />
+            <SiteLogo variant="admin-mark" size={48} />
           </div>
           <h1 className="text-2xl font-bold text-white">Admin Login</h1>
           <p className="text-sm text-gray/50 mt-1">MGL Construction & Interior</p>

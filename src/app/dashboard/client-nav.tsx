@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { SiteLogo } from '@/components/site-logo'
 
 export default function ClientNav() {
   return (
@@ -8,7 +9,7 @@ export default function ClientNav() {
       <div className="section-container flex items-center justify-between h-14">
         <div className="flex items-center gap-2">
           <Link href="/dashboard" className="flex items-center gap-2 text-sm font-bold text-terracotta">
-            <div className="w-7 h-7 rounded-lg bg-terracotta flex items-center justify-center text-white text-[10px] font-bold">M</div>
+            <SiteLogo variant="mark" size={28} className="rounded-lg" />
             My Dashboard
           </Link>
         </div>

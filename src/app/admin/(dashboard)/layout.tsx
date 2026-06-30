@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/session'
-import { BrandMark } from '@/components/brand-mark'
+import { getSiteSettings } from '@/lib/queries'
+import { SiteLogo } from '@/components/site-logo'
 
 const navItems = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
@@ -17,13 +18,14 @@ const navItems = [
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession()
   if (!session?.adminId) redirect('/admin/login')
+  const settings = await getSiteSettings()
 
   return (
     <div className="min-h-screen bg-warm-gray-50 flex">
       <aside className="w-64 bg-warm-gray text-white shrink-0 hidden md:flex flex-col">
         <div className="px-5 py-6 border-b border-white/5">
           <Link href="/admin/dashboard" className="inline-block">
-            <BrandMark size={28} variant="admin" />
+            <SiteLogo settings={settings} variant="admin-mark" size={28} />
           </Link>
         </div>
         <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
@@ -60,7 +62,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <div className="flex-1 flex flex-col min-w-0">
         <header className="bg-white border-b border-sand-light px-6 py-3 flex md:hidden items-center justify-between">
           <Link href="/admin/dashboard" className="flex items-center gap-2">
-            <BrandMark size={24} variant="admin" />
+            <SiteLogo settings={settings} variant="admin-mark" size={24} />
             <span className="text-xs font-bold text-terracotta tracking-tight">Admin</span>
           </Link>
           <div className="flex items-center gap-3 text-xs">

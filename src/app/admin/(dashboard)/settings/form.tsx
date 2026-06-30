@@ -4,18 +4,57 @@ import { useState } from 'react'
 import { useActionState } from 'react'
 import { saveSettings } from '@/lib/admin-actions'
 import dynamic from 'next/dynamic'
+import { SiteLogo } from '@/components/site-logo'
 
 const RichEditor = dynamic(() => import('@/components/ui/rich-editor'), { ssr: false })
 
 export default function SettingsForm({ settings }: { settings: Record<string, string> }) {
   const [state, action, pending] = useActionState(saveSettings, { error: '', success: '' })
   const [aboutContent, setAboutContent] = useState(settings.about_content || '')
+  const [logoUrl, setLogoUrl] = useState(settings.logo_url || '')
+  const [uploading, setUploading] = useState(false)
+
+  async function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setUploading(true)
+    try {
+      const fd = new FormData()
+      fd.append('file', file)
+      const res = await fetch('/api/upload', { method: 'POST', body: fd })
+      const data = await res.json()
+      if (data.success) {
+        setLogoUrl(data.image.url)
+      }
+    } catch {
+      alert('Upload failed')
+    } finally {
+      setUploading(false)
+    }
+  }
 
   return (
     <div>
       <h1 className="text-2xl font-bold text-warm-gray mb-8">Site Settings</h1>
 
       <form action={action} className="max-w-3xl space-y-6">
+        <fieldset className="border border-gray/20 rounded-lg p-6">
+          <legend className="text-sm font-semibold text-warm-gray px-2">Logo</legend>
+          <div className="flex items-start gap-6">
+            <div className="w-32 h-16 rounded-lg border border-sand-light bg-white flex items-center justify-center overflow-hidden shrink-0">
+              <SiteLogo settings={{ ...settings, logo_url: logoUrl }} variant="full" />
+            </div>
+            <div className="flex-1 space-y-2">
+              <label className="block text-sm font-medium text-warm-gray">Upload Logo</label>
+              <input type="hidden" name="logo_url" value={logoUrl} />
+              <input type="file" accept="image/*" onChange={handleLogoUpload} disabled={uploading}
+                className="block w-full text-sm text-gray-dark file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-terracotta-50 file:text-terracotta hover:file:bg-terracotta/10 cursor-pointer" />
+              {uploading && <p className="text-xs text-gray">Uploading...</p>}
+              <p className="text-xs text-gray">Recommended: PNG or SVG, max 200px wide. Falls back to default logo if empty.</p>
+            </div>
+          </div>
+        </fieldset>
+
         <fieldset className="border border-gray/20 rounded-lg p-6">
           <legend className="text-sm font-semibold text-warm-gray px-2">Company Info</legend>
           <div className="space-y-4">

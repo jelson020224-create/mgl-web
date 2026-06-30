@@ -40,7 +40,8 @@ export async function getSettings() {
 export async function saveSettings(prevState: { error: string; success: string }, formData: FormData) {
   const keys = ['company_name', 'company_email', 'company_phone', 'company_address',
     'hero_title', 'hero_subtitle', 'about_content',
-    'stats_projects', 'stats_years', 'stats_clients', 'stats_team']
+    'stats_projects', 'stats_years', 'stats_clients', 'stats_team',
+    'logo_url']
 
   for (const key of keys) {
     const value = formData.get(key) as string

@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { SiteLogo } from './site-logo'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -35,7 +35,7 @@ export default function Navbar({ settings }: NavbarProps) {
       <div className="section-container">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="shrink-0">
-            <Image src="/LOGO-MGL.png" alt="MGL Logo" width={150} height={45} className="h-10 w-auto object-contain" />
+            <SiteLogo settings={settings} variant="full" />
           </Link>
 
           <div className="hidden md:flex items-center gap-1">

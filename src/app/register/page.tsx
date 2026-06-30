@@ -3,6 +3,7 @@
 import { useActionState } from 'react'
 import Link from 'next/link'
 import { registerClient } from './actions'
+import { SiteLogo } from '@/components/site-logo'
 
 const initialState = { error: '' }
 
@@ -14,7 +15,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-terracotta flex items-center justify-center text-white font-bold text-sm">M</div>
+            <SiteLogo variant="mark" size={40} />
           </Link>
           <h1 className="text-2xl font-bold text-warm-gray">Create account</h1>
           <p className="text-sm text-gray-dark mt-1">Track your project updates</p>

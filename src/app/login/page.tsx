@@ -4,6 +4,7 @@ import { useActionState, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { clientLogin } from './actions'
+import { SiteLogo } from '@/components/site-logo'
 
 const initialState = { error: '' }
 
@@ -17,7 +18,7 @@ function LoginFormInner() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-terracotta flex items-center justify-center text-white font-bold text-sm">M</div>
+            <SiteLogo variant="mark" size={40} />
           </Link>
           <h1 className="text-2xl font-bold text-warm-gray">Welcome back</h1>
           <p className="text-sm text-gray-dark mt-1">Sign in to your client dashboard</p>
