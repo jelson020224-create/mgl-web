@@ -30,7 +30,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <div className="flex items-start gap-6">
               <div className="w-20 h-20 rounded-2xl bg-terracotta/15 flex items-center justify-center text-4xl shrink-0">{service.icon}</div>
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold font-serif leading-tight">{service.title}</h1>
+                <h1 className="text-4xl md:text-5xl font-bold font-serif leading-[1.05]">{service.title}</h1>
                 <p className="text-lg text-gray-light/60 mt-3 max-w-2xl leading-relaxed">{service.description}</p>
               </div>
             </div>
@@ -65,7 +65,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <section className="relative bg-warm-gray text-white overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] pattern-dots" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-terracotta/5 rounded-full blur-[120px]" />
-        <div className="section py-20 text-center relative">
+        <div className="section py-[clamp(4rem,8vw,8rem)] text-center relative">
           <div className="max-w-xl mx-auto">
             <AnimateOnScroll type="scale-in">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">Interested in {service.title}?</h2>

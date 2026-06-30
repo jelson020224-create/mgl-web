@@ -20,7 +20,7 @@ export default async function PortfolioPage() {
         <div className="section-container relative text-center">
           <AnimateOnScroll type="fade-up">
             <span className="section-eyebrow text-terracotta/80">Our Work</span>
-            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-5">
+            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-[1.05] mb-5">
               Our <span className="gradient-text">Portfolio</span>
             </h1>
             <p className="text-lg text-gray-light/60 font-light">A showcase of our finest work</p>
@@ -41,7 +41,7 @@ export default async function PortfolioPage() {
           )}
 
           {items.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[clamp(1rem,2vw,1.5rem)]">
               {items.map((p, i) => (
                 <AnimateOnScroll key={p.id} type="scale-in" delay={i * 80}>
                   <div className="card-modern shadow-soft group overflow-hidden">

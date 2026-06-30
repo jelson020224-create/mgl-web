@@ -22,7 +22,7 @@ export default async function ServicesPage() {
         <div className="section-container relative text-center">
           <AnimateOnScroll type="fade-up">
             <span className="section-eyebrow text-terracotta/80">Our Expertise</span>
-            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-5">Our <span className="gradient-text">Services</span></h1>
+            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-[1.05] mb-5">Our <span className="gradient-text">Services</span></h1>
             <p className="text-lg text-gray-light/60 max-w-2xl mx-auto font-light">
               Everything you need under one roof — from concept to completion.
             </p>
@@ -32,7 +32,7 @@ export default async function ServicesPage() {
 
       <section className="section bg-mesh relative">
         <div className="section-container relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(1rem,2vw,1.5rem)]">
             {services.map((s, i) => (
               <AnimateOnScroll key={s.id} type="fade-up" delay={i * 80}>
                 <Link href={`/services/${s.id}`} className="group block">
@@ -80,7 +80,7 @@ export default async function ServicesPage() {
       <section className="relative bg-warm-gray text-white overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] pattern-dots" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-terracotta/5 rounded-full blur-[120px]" />
-        <div className="section py-20 text-center relative">
+        <div className="section py-[clamp(4rem,8vw,8rem)] text-center relative">
           <div className="max-w-xl mx-auto">
             <AnimateOnScroll type="scale-in">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">Not Sure What You Need?</h2>

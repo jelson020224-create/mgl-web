@@ -81,6 +81,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── Fluid Spacing System ── */
+:root {
+  --fluid-gap: clamp(1rem, 2vw, 1.5rem);
+  --fluid-gap-lg: clamp(1.5rem, 3vw, 2.5rem);
+  --fluid-section: clamp(4rem, 8vw, 8rem);
+  --fluid-hero: clamp(5rem, 10vw, 10rem);
+  --fluid-container: clamp(1.25rem, 3vw, 2.5rem);
+  --fluid-header-mb: clamp(2.5rem, 4vw, 4rem);
+}
+
 ::selection {
   background: var(--terracotta);
   color: white;
@@ -96,30 +106,25 @@ body {
 .section-container {
   max-width: 80rem;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem);
 }
-@media (min-width: 640px) { .section-container { padding: 0 2rem; } }
-@media (min-width: 1024px) { .section-container { padding: 0 2.5rem; } }
 
 /* ── Section ── */
 .section {
-  padding: 4rem 0;
+  padding: clamp(4rem, 8vw, 8rem) 0;
 }
-@media (min-width: 768px) { .section { padding: 6rem 0; } }
 
 .hero-section {
-  padding: 6rem 0;
+  padding: clamp(5rem, 10vw, 10rem) 0;
 }
-@media (min-width: 768px) { .hero-section { padding: 10rem 0; } }
 
 .section-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
   max-width: 48rem;
   margin-left: auto;
   margin-right: auto;
 }
-@media (min-width: 768px) { .section-header { margin-bottom: 4rem; } }
 
 .section-eyebrow {
   display: inline-block;
@@ -133,14 +138,13 @@ body {
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: 2.25rem;
+  font-size: clamp(1.875rem, 4vw, 3.25rem);
   font-weight: 700;
   color: var(--warm-gray);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   margin-bottom: 1rem;
 }
-@media (min-width: 768px) { .section-title { font-size: 2.75rem; } }
 
 .section-subtitle {
   color: var(--gray-dark);
@@ -700,7 +704,7 @@ tbody tr:hover { background: var(--warm-gray-50); }
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
+  gap: clamp(1rem, 2vw, 1.5rem);
 }
 @media (min-width: 768px) {
   .bento-wide { grid-column: span 2; }

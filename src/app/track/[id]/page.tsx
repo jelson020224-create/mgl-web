@@ -42,7 +42,7 @@ export default function TrackProjectPage({ params }: { params: Promise<{ id: str
   if (project) {
     return (
       <>
-        <section className="bg-warm-gray text-white py-20 md:py-28">
+        <section className="bg-warm-gray text-white py-[clamp(3rem,6vw,6rem)]">
           <div className="section-container">
             <AnimateOnScroll type="fade-up">
               <h1 className="text-3xl font-bold">{project.clientName}</h1>
@@ -54,7 +54,7 @@ export default function TrackProjectPage({ params }: { params: Promise<{ id: str
           </div>
         </section>
 
-        <section className="py-20 md:py-28 bg-cream">
+        <section className="py-[clamp(3rem,6vw,6rem)] bg-cream">
           <div className="section-container">
             <AnimateOnScroll type="fade-up">
               <h2 className="text-2xl font-bold text-warm-gray mb-8">Project Updates</h2>

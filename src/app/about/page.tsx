@@ -23,7 +23,7 @@ export default async function AboutPage() {
         <div className="section-container relative text-center">
           <AnimateOnScroll type="fade-up">
             <span className="section-eyebrow text-terracotta/80">Who We Are</span>
-            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-[1.05] mb-6">
               About <span className="gradient-text">MGL</span>
             </h1>
             <div className="text-lg text-gray-light/70 max-w-3xl mx-auto font-light"
@@ -44,7 +44,7 @@ export default async function AboutPage() {
               <p className="section-subtitle">Experts in every discipline, working as one</p>
             </div>
           </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[clamp(1rem,2vw,1.5rem)]">
             {team.map((m, i) => (
               <AnimateOnScroll key={m.role} type="fade-up" delay={i * 80}>
                 <div className="card-modern shadow-soft p-8 text-center group h-full relative overflow-hidden">
@@ -74,7 +74,7 @@ export default async function AboutPage() {
               <p className="section-subtitle">A streamlined process from idea to completion</p>
             </div>
           </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-[clamp(1.5rem,3vw,3rem)] mt-4">
             {[
               { step: '01', title: 'Consult' },
               { step: '02', title: 'Design' },
@@ -98,7 +98,7 @@ export default async function AboutPage() {
       <section className="relative bg-warm-gray text-white overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] pattern-dots" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-terracotta/5 rounded-full blur-[120px]" />
-        <div className="section py-20 text-center relative">
+        <div className="section py-[clamp(4rem,8vw,8rem)] text-center relative">
           <div className="max-w-xl mx-auto">
             <AnimateOnScroll type="scale-in">
               <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-terracotta/70 mb-5 bg-terracotta/10 px-4 py-1.5 rounded-full">

@@ -40,14 +40,14 @@ export default async function HomePage() {
         <div className="noise-overlay absolute inset-0" />
 
         <div className="relative w-full">
-          <div className="section-container py-32 md:py-48">
+          <div className="section-container py-[clamp(6rem,14vw,14rem)]">
             <div className="max-w-3xl">
               <AnimateOnScroll type="fade-up">
                 <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-terracotta/80 mb-5 bg-terracotta/10 px-4 py-1.5 rounded-full">
                   <span className="w-1.5 h-1.5 rounded-full bg-terracotta animate-pulse-soft" />
                   MGL Construction & Interior
                 </span>
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] mb-6 font-serif tracking-tight">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.02] mb-6 font-serif tracking-tight">
                   Building Your{' '}
                   <span className="gradient-text">Vision</span>
                   <br />From the Ground Up
@@ -74,11 +74,11 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="section-container pb-20 md:pb-28">
-            <div className="divider-dash mb-12">
+          <div className="section-container pb-[clamp(3rem,6vw,6rem)]">
+            <div className="divider-dash mb-[clamp(2rem,4vw,4rem)]">
               <span className="divider-dash-dot" />
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(1rem,2vw,1.5rem)]">
               <StatCard num={(settings.stats_projects || '150') + '+'} label="Projects Completed" delay={600} />
               <StatCard num={(settings.stats_years || '12') + '+'} label="Years Experience" delay={700} />
               <StatCard num={(settings.stats_clients || '50') + '+'} label="Happy Clients" delay={800} />
@@ -234,13 +234,13 @@ export default async function HomePage() {
         <div className="absolute inset-0 opacity-[0.03] pattern-grid" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-terracotta/5 rounded-full blur-[150px]" />
         <div className="noise-overlay absolute inset-0" />
-        <div className="section py-24 text-center relative">
+        <div className="section py-[clamp(5rem,10vw,10rem)] text-center relative">
           <div className="max-w-2xl mx-auto">
             <AnimateOnScroll type="scale-in">
               <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-terracotta/70 mb-5 bg-terracotta/10 px-4 py-1.5 rounded-full">
                 Let&apos;s Build Together
               </span>
-              <h2 className="text-4xl md:text-5xl font-bold mb-5 font-serif leading-tight">
+              <h2 className="text-4xl md:text-5xl font-bold mb-5 font-serif leading-[1.05]">
                 Ready to Start<br />Your <span className="gradient-text">Project</span>?
               </h2>
               <p className="text-gray-light/60 mb-10 text-lg max-w-lg mx-auto font-light">

@@ -12,8 +12,8 @@ export default function Footer({ settings }: FooterProps) {
     <footer className="relative bg-warm-gray overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-terracotta via-terracotta/50 to-transparent" />
 
-      <div className="section-container py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="section-container py-[clamp(3rem,5vw,5rem)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[clamp(1.5rem,3vw,3rem)]">
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-5">
               <SiteLogo settings={settings} variant="full" className="h-10" />

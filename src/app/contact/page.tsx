@@ -19,7 +19,7 @@ export default function ContactPage() {
         <div className="section-container relative text-center">
           <AnimateOnScroll type="fade-up">
             <span className="section-eyebrow text-terracotta/80">Get in Touch</span>
-            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-5">
+            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-[1.05] mb-5">
               Contact <span className="gradient-text">Us</span>
             </h1>
             <p className="text-lg text-gray-light/60 font-light">Let&apos;s bring your vision to life</p>
@@ -29,7 +29,7 @@ export default function ContactPage() {
 
       <section className="section bg-mesh relative">
         <div className="section-container relative">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-[clamp(1.5rem,3vw,3rem)]">
             <AnimateOnScroll type="fade-up" className="lg:col-span-2">
               <div className="space-y-8">
                 <div>

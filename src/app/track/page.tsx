@@ -23,7 +23,7 @@ export default async function TrackPage({
       <section className="bg-warm-gray text-white hero-section">
         <div className="section-container text-center">
           <AnimateOnScroll type="fade-up">
-            <h1 className="text-5xl font-bold mb-6">Track Your <span className="text-terracotta">Project</span></h1>
+            <h1 className="text-5xl font-bold mb-6 leading-[1.05]">Track Your <span className="text-terracotta">Project</span></h1>
           </AnimateOnScroll>
           <AnimateOnScroll type="fade-up" delay={200}>
             <p className="text-lg text-gray-light/80 mb-8">
