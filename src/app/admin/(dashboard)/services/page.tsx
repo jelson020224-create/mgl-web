@@ -2,7 +2,10 @@ import prisma from '@/lib/prisma'
 import { AdminServiceForm } from './form'
 
 export default async function AdminServicesPage() {
-  const services = await prisma.service.findMany({ orderBy: { order: 'asc' } })
+  const services = await prisma.service.findMany({
+    orderBy: { order: 'asc' },
+    include: { _count: { select: { samples: true } } },
+  })
 
   return (
     <>
@@ -20,6 +23,9 @@ export default async function AdminServicesPage() {
               <div className="flex-1 min-w-0">
                 <h3 className="font-bold text-black">{s.title}</h3>
                 <p className="text-sm text-gray">{s.description}</p>
+                <a href={`/admin/services/${s.id}/samples`} className="text-xs text-orange hover:underline mt-1 inline-block">
+                  {s._count.samples} sample{s._count.samples !== 1 ? 's' : ''} — Manage
+                </a>
               </div>
               <form action={async () => {
                 'use server'

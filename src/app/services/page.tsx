@@ -1,8 +1,12 @@
 import prisma from '@/lib/prisma'
+import Link from 'next/link'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
 
 async function getServices() {
-  return prisma.service.findMany({ orderBy: { order: 'asc' } })
+  return prisma.service.findMany({
+    orderBy: { order: 'asc' },
+    include: { samples: { orderBy: { order: 'asc' }, take: 3 } },
+  })
 }
 
 export default async function ServicesPage() {
@@ -28,13 +32,32 @@ export default async function ServicesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {services.map((s, i) => (
               <AnimateOnScroll key={s.id} type="fade-up" delay={i * 100}>
-                <div className="card card-shine p-8 flex gap-6 items-start group">
-                  <div className="text-5xl shrink-0 transition-transform duration-300 group-hover:scale-110">{s.icon}</div>
-                  <div>
-                    <h2 className="text-2xl font-bold text-warm-gray mb-3">{s.title}</h2>
-                    <p className="text-gray leading-relaxed">{s.description}</p>
+                <Link href={`/services/${s.id}`} className="card card-shine p-8 flex flex-col gap-6 group block hover:shadow-xl transition-all duration-300">
+                  <div className="flex gap-6 items-start">
+                    <div className="text-5xl shrink-0 transition-transform duration-300 group-hover:scale-110">{s.icon}</div>
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-2xl font-bold text-warm-gray mb-3">{s.title}</h2>
+                      <p className="text-gray leading-relaxed">{s.description}</p>
+                    </div>
                   </div>
-                </div>
+                  {s.samples.length > 0 && (
+                    <div className="flex gap-2 -mx-1">
+                      {s.samples.map((sample) => (
+                        <div key={sample.id} className="flex-1 aspect-video rounded-lg overflow-hidden bg-gray-light">
+                          <img
+                            src={sample.imageUrl}
+                            alt={sample.caption || ''}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between mt-auto">
+                    <span className="text-xs text-gray">{s.samples.length} sample{s.samples.length !== 1 ? 's' : ''}</span>
+                    <span className="text-sm text-terracotta font-medium group-hover:underline">View Samples &rarr;</span>
+                  </div>
+                </Link>
               </AnimateOnScroll>
             ))}
           </div>
