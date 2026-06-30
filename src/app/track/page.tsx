@@ -38,7 +38,7 @@ export default async function TrackPage({
                 placeholder="Search your name..."
                 className="flex-1 px-4 py-3 rounded-lg text-warm-gray bg-white focus:outline-none focus:ring-2 focus:ring-terracotta transition-all duration-300"
               />
-              <button type="submit" className="inline-flex items-center justify-center gap-2 font-semibold text-[0.9375rem] px-7 py-3 rounded-lg bg-terracotta text-white shadow-lg hover:bg-terracotta-dark hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 cursor-pointer border-0 whitespace-nowrap no-underline leading-tight">Search</button>
+              <button type="submit" className="inline-flex items-center justify-center gap-2 font-semibold text-[0.9375rem] px-7 py-3 rounded-lg bg-terracotta text-white shadow-lg hover:bg-terracotta-dark hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 cursor-pointer border-0 whitespace-nowrap no-underline leading-tight" style={{borderRadius:'0.5rem',padding:'0.75rem 1.75rem',backgroundColor:'#c76a4e',color:'white',border:'none',fontSize:'0.9375rem',fontWeight:600,lineHeight:1.4,whiteSpace:'nowrap'}}>Search</button>
             </form>
           </AnimateOnScroll>
         </div>
