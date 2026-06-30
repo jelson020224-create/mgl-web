@@ -12,12 +12,12 @@ export default async function AdminProjectsPage() {
       </div>
 
       {projects.length === 0 ? (
-        <div className="card p-12 text-center text-gray">
+        <div className="card-modern shadow-soft p-12 text-center text-gray">
           <p className="text-lg mb-2">No projects yet</p>
           <p className="text-sm">Create your first project to start tracking client updates.</p>
         </div>
       ) : (
-        <div className="card overflow-hidden">
+        <div className="card-modern shadow-soft overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-gray-50">
               <tr>

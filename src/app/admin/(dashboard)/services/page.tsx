@@ -11,14 +11,14 @@ export default async function AdminServicesPage() {
     <>
       <h1 className="text-2xl font-bold text-black mb-6">Services</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="card p-8">
+        <div className="card-modern shadow-soft p-8">
           <h2 className="text-lg font-bold text-black mb-4">Add / Edit Service</h2>
           <AdminServiceForm />
         </div>
 
         <div className="space-y-4">
           {services.map((s) => (
-            <div key={s.id} className="card p-6 flex items-start gap-4">
+            <div key={s.id} className="card-modern shadow-soft p-6 flex items-start gap-4">
               <span className="text-3xl">{s.icon}</span>
               <div className="flex-1 min-w-0">
                 <h3 className="font-bold text-black">{s.title}</h3>

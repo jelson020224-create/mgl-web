@@ -16,7 +16,7 @@ export default function SamplesGallery({ samples }: { samples: Sample[] }) {
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {samples.map((s, i) => (
-          <button key={s.id} onClick={() => setLightboxIndex(i)} className="card p-2 text-left group cursor-pointer hover:shadow-md transition-shadow">
+          <button key={s.id} onClick={() => setLightboxIndex(i)} className="card-modern shadow-soft p-2 text-left group cursor-pointer hover:shadow-md transition-shadow">
             <div className="aspect-video rounded-lg overflow-hidden bg-gray-light">
               <img
                 src={s.imageUrl}

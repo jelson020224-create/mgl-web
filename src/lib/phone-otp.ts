@@ -1,35 +1,35 @@
-const otpStore = new Map<string, { code: string; expiresAt: number }>()
+import { SignJWT, jwtVerify } from 'jose'
 
-const CLEANUP_INTERVAL = 60_000
-let lastCleanup = Date.now()
+const secretKey = process.env.SESSION_SECRET || 'fallback-secret-change-me'
+const encodedKey = new TextEncoder().encode(secretKey)
 
-function cleanup() {
-  const now = Date.now()
-  if (now - lastCleanup < CLEANUP_INTERVAL) return
-  lastCleanup = now
-  for (const [key, val] of otpStore) {
-    if (val.expiresAt < now) otpStore.delete(key)
-  }
+interface OtpPayload {
+  phone: string
+  code: string
+  expiresAt: number
 }
 
-export function generateAndStoreOtp(phone: string): string {
-  cleanup()
-  const code = String(Math.floor(100000 + Math.random() * 900000))
-  otpStore.set(phone, { code, expiresAt: Date.now() + 5 * 60_000 })
-  return code
+export async function createOtpCookie(phone: string, code: string): Promise<string> {
+  const expiresAt = Date.now() + 5 * 60_000
+  return new SignJWT({ phone, code, expiresAt })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('5m')
+    .sign(encodedKey)
 }
 
-export function verifyOtp(phone: string, code: string): boolean {
-  cleanup()
-  const entry = otpStore.get(phone)
-  if (!entry) return false
-  if (entry.expiresAt < Date.now()) {
-    otpStore.delete(phone)
+export async function verifyOtpFromCookie(cookie: string | undefined, phone: string, code: string): Promise<boolean> {
+  if (!cookie) return false
+  try {
+    const { payload } = await jwtVerify(cookie, encodedKey, { algorithms: ['HS256'] })
+    const data = payload as unknown as OtpPayload
+    if (data.phone !== phone) return false
+    if (data.expiresAt < Date.now()) return false
+    if (data.code !== code) return false
+    return true
+  } catch {
     return false
   }
-  if (entry.code !== code) return false
-  otpStore.delete(phone)
-  return true
 }
 
 export async function sendSms(phone: string, code: string): Promise<boolean> {
@@ -38,7 +38,6 @@ export async function sendSms(phone: string, code: string): Promise<boolean> {
   const fromNumber = process.env.TWILIO_PHONE_NUMBER
 
   if (!accountSid || !authToken || !fromNumber) {
-    // Dev mode: log instead of sending
     console.log(`[DEV OTP] ${phone}: ${code}`)
     return true
   }

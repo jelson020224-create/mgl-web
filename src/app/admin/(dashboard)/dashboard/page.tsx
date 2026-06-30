@@ -31,7 +31,7 @@ export default async function AdminDashboardPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {stats.map((s) => (
-          <div key={s.label} className="card p-5 hover:translate-y-0">
+          <div key={s.label} className="card-modern shadow-soft p-5 hover:translate-y-0">
             <div className="flex items-start justify-between mb-3">
               <div className={`${s.bg} p-2 rounded-lg`}>
                 <svg className={`w-5 h-5 ${s.color}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -47,7 +47,7 @@ export default async function AdminDashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="card">
+        <div className="card-modern shadow-soft">
           <div className="px-6 py-4 border-b border-sand-light flex items-center justify-between">
             <h2 className="font-bold text-warm-gray">Recent Messages</h2>
             <Link href="/admin/messages" className="text-xs text-terracotta hover:underline font-medium">View all</Link>
@@ -74,7 +74,7 @@ export default async function AdminDashboardPage() {
           </div>
         </div>
 
-        <div className="card">
+        <div className="card-modern shadow-soft">
           <div className="px-6 py-4 border-b border-sand-light flex items-center justify-between">
             <h2 className="font-bold text-warm-gray">Recent Projects</h2>
             <Link href="/admin/projects" className="text-xs text-terracotta hover:underline font-medium">View all</Link>

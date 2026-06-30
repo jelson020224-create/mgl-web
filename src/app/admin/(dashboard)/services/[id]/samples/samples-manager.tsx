@@ -65,7 +65,7 @@ function SampleCard({ sample, onDeleted }: { sample: Sample; onDeleted: () => vo
   }
 
   return (
-    <div className="card p-4 flex gap-4">
+    <div className="card-modern shadow-soft p-4 flex gap-4">
       <div className="w-32 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-light">
         <img src={sample.imageUrl} alt={sample.caption || ''} className="w-full h-full object-cover" />
       </div>
@@ -111,7 +111,7 @@ export default function SamplesManager({ service }: { service: Service }) {
         </div>
       </div>
 
-      <div className="card p-8 mb-8">
+      <div className="card-modern shadow-soft p-8 mb-8">
         <h2 className="text-lg font-bold text-black mb-4">Add Sample</h2>
         <AddSampleForm serviceId={service.id} />
       </div>
@@ -119,7 +119,7 @@ export default function SamplesManager({ service }: { service: Service }) {
       <div className="space-y-4" key={key}>
         <h2 className="text-lg font-bold text-black">{service.samples.length} Samples</h2>
         {service.samples.length === 0 ? (
-          <div className="card p-12 text-center text-gray">
+          <div className="card-modern shadow-soft p-12 text-center text-gray">
             <p>No samples yet. Add your first sample above.</p>
           </div>
         ) : (

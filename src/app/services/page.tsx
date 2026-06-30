@@ -36,7 +36,7 @@ export default async function ServicesPage() {
             {services.map((s, i) => (
               <AnimateOnScroll key={s.id} type="fade-up" delay={i * 80}>
                 <Link href={`/services/${s.id}`} className="group block">
-                  <div className="card p-8 h-full relative overflow-hidden">
+                  <div className="card-modern shadow-soft p-8 h-full relative overflow-hidden">
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-terracotta to-terracotta-light scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                     <div className="flex gap-6 items-start">
                       <div className="w-16 h-16 rounded-2xl bg-terracotta-50 flex items-center justify-center text-3xl shrink-0 group-hover:bg-terracotta group-hover:text-white transition-all duration-300">

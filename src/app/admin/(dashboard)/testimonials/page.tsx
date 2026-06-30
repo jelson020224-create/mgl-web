@@ -14,7 +14,7 @@ export default async function TestimonialsPage() {
 
       <div className="space-y-4">
         {testimonials.map((t) => (
-          <div key={t.id} className="card p-6">
+          <div key={t.id} className="card-modern shadow-soft p-6">
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="font-semibold text-warm-gray">{t.clientName}</h3>

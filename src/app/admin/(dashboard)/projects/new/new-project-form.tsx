@@ -17,7 +17,7 @@ export default function NewProjectForm({ clients }: { clients: Client[] }) {
   return (
     <>
       <h1 className="text-2xl font-bold text-black mb-6">New Project</h1>
-      <div className="card p-8 max-w-2xl">
+      <div className="card-modern shadow-soft p-8 max-w-2xl">
         <form action={formAction} className="space-y-4">
           <div>
             <label className="block text-sm font-semibold text-black mb-1">Client Name *</label>

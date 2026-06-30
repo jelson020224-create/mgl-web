@@ -14,7 +14,7 @@ export default async function MediaPage() {
 
       <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
         {images.map((img) => (
-          <div key={img.id} className="card overflow-hidden group relative">
+          <div key={img.id} className="card-modern shadow-soft overflow-hidden group relative">
             <div className="aspect-square bg-gray/10 relative">
               <img src={img.url} alt={img.alt || img.filename} className="w-full h-full object-cover" />
             </div>

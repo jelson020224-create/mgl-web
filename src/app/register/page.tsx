@@ -21,7 +21,7 @@ export default function RegisterPage() {
           <p className="text-sm text-gray-dark mt-1">Track your project updates</p>
         </div>
 
-        <div className="card p-6">
+        <div className="card-modern shadow-soft p-6">
           <form action={formAction} className="space-y-4">
             <div className="input-group">
               <label className="input-label" htmlFor="name">Full Name</label>

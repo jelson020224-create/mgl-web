@@ -1,6 +1,6 @@
 export function CardSkeleton() {
   return (
-    <div className="card p-6 space-y-3">
+    <div className="card-modern shadow-soft p-6 space-y-3">
       <div className="skeleton h-6 w-3/4" />
       <div className="skeleton h-4 w-full" />
       <div className="skeleton h-4 w-2/3" />

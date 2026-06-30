@@ -56,7 +56,7 @@ export default async function TrackPage({
                 <AnimateOnScroll key={p.id} type="fade-up" delay={i * 80}>
                   <a
                     href={`/track/${p.id}`}
-                    className="card p-6 flex items-center justify-between group hover:border-terracotta/50 border border-transparent"
+                    className="card-modern shadow-soft p-6 flex items-center justify-between group hover:border-terracotta/50 border border-transparent"
                   >
                     <div>
                       <h3 className="text-lg font-bold text-warm-gray group-hover:text-terracotta transition-colors">{p.clientName}</h3>

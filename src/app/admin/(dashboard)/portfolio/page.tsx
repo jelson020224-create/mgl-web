@@ -8,14 +8,14 @@ export default async function AdminPortfolioPage() {
     <>
       <h1 className="text-2xl font-bold text-black mb-6">Portfolio</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="card p-8">
+        <div className="card-modern shadow-soft p-8">
           <h2 className="text-lg font-bold text-black mb-4">Add Portfolio Item</h2>
           <AdminPortfolioForm />
         </div>
 
         <div className="grid grid-cols-1 gap-4">
           {items.map((p) => (
-            <div key={p.id} className="card p-4 flex items-center gap-4">
+            <div key={p.id} className="card-modern shadow-soft p-4 flex items-center gap-4">
               <div className="w-16 h-16 bg-gray-light rounded-lg flex items-center justify-center text-gray text-sm shrink-0">📷</div>
               <div className="flex-1 min-w-0">
                 <h3 className="font-bold text-black text-sm">{p.title}</h3>

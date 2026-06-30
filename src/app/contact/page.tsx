@@ -66,7 +66,7 @@ export default function ContactPage() {
             </AnimateOnScroll>
 
             <AnimateOnScroll type="fade-up" delay={150} className="lg:col-span-3">
-              <div className="card p-8">
+              <div className="card-modern shadow-soft p-8">
                 <h3 className="text-lg font-bold text-warm-gray mb-6">Send us a message</h3>
                 <form action={formAction} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

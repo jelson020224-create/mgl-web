@@ -56,7 +56,7 @@ export default function EditProjectForm({ clients }: { clients: Client[] }) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="card p-8">
+        <div className="card-modern shadow-soft p-8">
           <h2 className="text-lg font-bold text-black mb-4">Project Details</h2>
           <form action={updateAction} className="space-y-4">
             <div>
@@ -96,7 +96,7 @@ export default function EditProjectForm({ clients }: { clients: Client[] }) {
           </form>
         </div>
 
-        <div className="card p-8">
+        <div className="card-modern shadow-soft p-8">
           <h2 className="text-lg font-bold text-black mb-4">Add Update</h2>
           <form action={addAction} className="space-y-4">
             <div>

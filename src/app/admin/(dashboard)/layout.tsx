@@ -97,9 +97,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
           </div>
         </header>
         <main className="flex-1 p-6 overflow-y-auto">
-          <div className="card-modern shadow-soft">
-            <div className="p-6">{children}</div>
-          </div>
+          {children}
         </main>
       </div>
     </div>

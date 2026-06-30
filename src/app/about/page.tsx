@@ -47,7 +47,7 @@ export default async function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {team.map((m, i) => (
               <AnimateOnScroll key={m.role} type="fade-up" delay={i * 80}>
-                <div className="card card-shine p-8 text-center group h-full relative overflow-hidden">
+                <div className="card-modern shadow-soft p-8 text-center group h-full relative overflow-hidden">
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-terracotta to-terracotta-light scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                   <div className="w-16 h-16 rounded-2xl bg-terracotta-50 flex items-center justify-center mx-auto mb-5 text-3xl group-hover:bg-terracotta group-hover:text-white transition-all duration-300">
                     {m.icon}

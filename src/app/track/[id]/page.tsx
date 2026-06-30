@@ -65,7 +65,7 @@ export default function TrackProjectPage({ params }: { params: Promise<{ id: str
               <div className="space-y-8">
                 {[...project.updates].reverse().map((u: any, i: number) => (
                   <AnimateOnScroll key={u.id} type="fade-up" delay={i * 100}>
-                    <div className="card p-6 hover:border-l-4 hover:border-terracotta transition-all duration-300">
+                    <div className="card-modern shadow-soft p-6 hover:border-l-4 hover:border-terracotta transition-all duration-300">
                       <p className="text-xs text-gray mb-2">{new Date(u.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                       <p className="text-warm-gray leading-relaxed whitespace-pre-line">{u.content}</p>
                       {u.imageUrl && (
@@ -88,7 +88,7 @@ export default function TrackProjectPage({ params }: { params: Promise<{ id: str
     <section className="section bg-cream min-h-[50vh] flex items-center justify-center">
       <div className="w-full max-w-md mx-auto px-4">
         <AnimateOnScroll type="scale-in">
-          <div className="card p-8">
+          <div className="card-modern shadow-soft p-8">
             <h2 className="text-xl font-bold text-warm-gray mb-2">Enter Project Password</h2>
             <p className="text-sm text-gray mb-6">Your contractor should have provided this.</p>
             <form onSubmit={handleSubmit} className="space-y-4">

@@ -28,13 +28,13 @@ export default async function AdminMessagesPage() {
       </h1>
 
       {messages.length === 0 ? (
-        <div className="card p-12 text-center text-gray">
+        <div className="card-modern shadow-soft p-12 text-center text-gray">
           <p>No messages yet.</p>
         </div>
       ) : (
         <div className="space-y-4">
           {messages.map((m) => (
-            <div key={m.id} className={`card p-6 ${!m.read ? 'border-l-4 border-orange' : ''}`}>
+            <div key={m.id} className={`card-modern shadow-soft p-6 ${!m.read ? 'border-l-4 border-orange' : ''}`}>
               <div className="flex items-start justify-between mb-3">
                 <div>
                   <h3 className="font-bold text-black">{m.name}</h3>

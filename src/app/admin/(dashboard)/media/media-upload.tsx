@@ -31,7 +31,7 @@ export default function MediaUpload() {
   }
 
   return (
-    <form onSubmit={handleUpload} className="card p-6 space-y-4">
+    <form onSubmit={handleUpload} className="card-modern shadow-soft p-6 space-y-4">
       <h2 className="font-semibold text-warm-gray">Upload Image</h2>
       <input type="file" name="file" accept="image/*" required className="block w-full text-sm text-gray file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-terracotta file:text-white hover:file:bg-terracotta/90" />
       <input type="text" name="alt" placeholder="Alt text (optional)" className="input-field" />
