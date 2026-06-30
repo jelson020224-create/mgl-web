@@ -16,7 +16,7 @@ export default function Footer({ settings }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[clamp(2rem,3vw,3rem)]">
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-5">
-              <SiteLogo settings={settings} variant="full" className="h-10" />
+              <SiteLogo settings={settings} variant="full" />
             </Link>
             <p className="text-sm text-gray/60 leading-relaxed pr-4">
               Building dreams with precision and passion. From concept to completion, we deliver excellence in every project.

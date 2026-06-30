@@ -42,8 +42,8 @@ export function BrandMark({ size = 32, variant = 'default' }: { size?: number; v
         <span className={`block text-sm font-bold tracking-tight ${variant === 'light' ? 'text-white' : 'text-warm-gray'}`}>
           MGL
         </span>
-        <span className={`block text-[10px] tracking-[0.2em] uppercase ${variant === 'light' ? 'text-gray-light/60' : 'text-gray'}`}>
-          Construction
+        <span className={`block text-[9px] tracking-[0.15em] uppercase leading-snug ${variant === 'light' ? 'text-gray-light/60' : 'text-gray'}`}>
+          Construction<br />&amp; Interior
         </span>
       </div>
     </div>

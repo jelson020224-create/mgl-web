@@ -22,14 +22,7 @@ export function SiteLogo({ settings, src, variant = 'full', size = 32, className
   }
 
   if (variant === 'full') {
-    return (
-      <img
-        src={logoUrl}
-        alt="MGL Logo"
-        className={`h-10 w-auto object-contain ${className}`}
-        onError={() => setErrored(true)}
-      />
-    )
+    return <BrandMark size={size} />
   }
 
   return (
