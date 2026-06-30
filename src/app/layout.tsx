@@ -7,6 +7,7 @@ import CookieConsent from "@/components/CookieConsent";
 import { ToastProvider } from "@/components/ui/toast";
 import { getSiteSettings } from "@/lib/queries";
 import Script from "next/script";
+import { headers } from "next/headers";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await headers();
   const settings = await getSiteSettings();
 
   return (

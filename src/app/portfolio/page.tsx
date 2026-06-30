@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic'
-
 import prisma from '@/lib/prisma'
 import { getSiteSettings } from '@/lib/queries'
 import AnimateOnScroll from '@/components/AnimateOnScroll'

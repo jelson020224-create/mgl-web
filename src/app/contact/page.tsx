@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic'
-
 import { getSiteSettings } from '@/lib/queries'
 import ContactForm from './contact-form'
 

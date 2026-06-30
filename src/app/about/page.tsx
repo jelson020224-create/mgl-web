@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic'
-
 import { getSiteSettings, getTeamMembers, getApproachSteps } from '@/lib/queries'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
 
