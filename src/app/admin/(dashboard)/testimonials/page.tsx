@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { getTestimonials } from '@/lib/queries'
-import { deleteTestimonial } from '../admin-actions'
+import { deleteTestimonial } from '@/lib/admin-actions'
 
 export default async function TestimonialsPage() {
   const testimonials = await getTestimonials()

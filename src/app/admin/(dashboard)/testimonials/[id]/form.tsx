@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
-import { saveTestimonial } from '../../admin-actions'
+import { saveTestimonial } from '@/lib/admin-actions'
 import Link from 'next/link'
 
 export default function TestimonialForm({ testimonial }: { testimonial: any }) {

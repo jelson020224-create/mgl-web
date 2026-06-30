@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
-import { createProject } from '../../actions'
+import { createProject } from '@/lib/admin-crud-actions'
 
 const initialState = { error: '', success: '' }
 

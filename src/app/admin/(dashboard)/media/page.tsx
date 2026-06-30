@@ -1,4 +1,4 @@
-import { getUploads } from '../admin-actions'
+import { getUploads } from '@/lib/admin-actions'
 import MediaUpload from './media-upload'
 
 export default async function MediaPage() {

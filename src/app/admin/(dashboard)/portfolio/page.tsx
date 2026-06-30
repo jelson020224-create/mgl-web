@@ -23,7 +23,7 @@ export default async function AdminPortfolioPage() {
               </div>
               <form action={async () => {
                 'use server'
-                const { deletePortfolioItem } = await import('../actions')
+                const { deletePortfolioItem } = await import('@/lib/admin-crud-actions')
                 await deletePortfolioItem(p.id)
               }}>
                 <button type="submit" className="text-sm text-red-500 hover:underline">Delete</button>

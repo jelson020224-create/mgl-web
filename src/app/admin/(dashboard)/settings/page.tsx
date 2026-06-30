@@ -1,4 +1,4 @@
-import { getSettings } from '../admin-actions'
+import { getSettings } from '@/lib/admin-actions'
 import SettingsForm from './form'
 
 export default async function SettingsPage() {

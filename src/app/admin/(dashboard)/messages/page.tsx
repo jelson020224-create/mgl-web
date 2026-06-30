@@ -3,13 +3,13 @@ import Link from 'next/link'
 
 async function markRead(formData: FormData) {
   'use server'
-  const { markMessageRead } = await import('../actions')
+  const { markMessageRead } = await import('@/lib/admin-crud-actions')
   await markMessageRead(Number(formData.get('id')))
 }
 
 async function delMessage(formData: FormData) {
   'use server'
-  const { deleteMessage } = await import('../actions')
+  const { deleteMessage } = await import('@/lib/admin-crud-actions')
   await deleteMessage(Number(formData.get('id')))
 }
 

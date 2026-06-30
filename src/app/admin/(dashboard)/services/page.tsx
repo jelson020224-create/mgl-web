@@ -23,7 +23,7 @@ export default async function AdminServicesPage() {
               </div>
               <form action={async () => {
                 'use server'
-                const { deleteService } = await import('../actions')
+                const { deleteService } = await import('@/lib/admin-crud-actions')
                 await deleteService(s.id)
               }}>
                 <button type="submit" className="text-sm text-red-500 hover:underline">Delete</button>

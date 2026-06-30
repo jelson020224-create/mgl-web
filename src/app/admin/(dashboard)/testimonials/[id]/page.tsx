@@ -1,4 +1,4 @@
-import { getSettings, getTestimonial } from '../../admin-actions'
+import { getSettings, getTestimonial } from '@/lib/admin-actions'
 import TestimonialForm from './form'
 
 export default async function EditTestimonial({ params }: { params: Promise<{ id: string }> }) {

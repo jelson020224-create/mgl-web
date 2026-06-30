@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useActionState } from 'react'
-import { updateProject, addUpdate, deleteProject } from '../../actions'
+import { updateProject, addUpdate, deleteProject } from '@/lib/admin-crud-actions'
 
 export default function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const [id, setId] = useState('')

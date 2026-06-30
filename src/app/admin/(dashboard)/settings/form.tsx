@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useActionState } from 'react'
-import { saveSettings } from '../admin-actions'
+import { saveSettings } from '@/lib/admin-actions'
 import dynamic from 'next/dynamic'
 
 const RichEditor = dynamic(() => import('@/components/ui/rich-editor'), { ssr: false })
