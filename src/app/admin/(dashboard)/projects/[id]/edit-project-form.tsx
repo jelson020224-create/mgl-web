@@ -7,7 +7,7 @@ import { updateProject, addUpdate, deleteProject } from '@/lib/admin-crud-action
 interface Client {
   id: number
   name: string
-  email: string
+  email: string | null
 }
 
 export default function EditProjectForm({ clients }: { clients: Client[] }) {
@@ -68,7 +68,7 @@ export default function EditProjectForm({ clients }: { clients: Client[] }) {
               <select name="clientId" defaultValue={project.clientId || ''} className="input-field bg-white">
                 <option value="">— None (standalone) —</option>
                 {clients.map((c) => (
-                  <option key={c.id} value={c.id}>{c.name} ({c.email})</option>
+                  <option key={c.id} value={c.id}>{c.name}{c.email ? ` (${c.email})` : ''}</option>
                 ))}
               </select>
             </div>

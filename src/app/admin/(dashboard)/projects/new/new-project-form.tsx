@@ -8,7 +8,7 @@ const initialState = { error: '', success: '' }
 interface Client {
   id: number
   name: string
-  email: string
+  email: string | null
 }
 
 export default function NewProjectForm({ clients }: { clients: Client[] }) {
@@ -28,7 +28,7 @@ export default function NewProjectForm({ clients }: { clients: Client[] }) {
             <select name="clientId" className="input-field bg-white">
               <option value="">— None (standalone project) —</option>
               {clients.map((c) => (
-                <option key={c.id} value={c.id}>{c.name} ({c.email})</option>
+                <option key={c.id} value={c.id}>{c.name}{c.email ? ` (${c.email})` : ''}</option>
               ))}
             </select>
           </div>

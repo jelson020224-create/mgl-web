@@ -11,7 +11,7 @@ export async function clientLogin(prevState: { error: string }, formData: FormDa
   if (!email || !password) return { error: 'Email and password are required.' }
 
   const client = await prisma.client.findUnique({ where: { email } })
-  if (!client) return { error: 'Invalid email or password.' }
+  if (!client || !client.password) return { error: 'Invalid email or password.' }
 
   const bcrypt = await import('bcryptjs')
   const match = await bcrypt.compare(password, client.password)
