@@ -1,0 +1,23 @@
+'use server'
+
+import prisma from '@/lib/prisma'
+
+export async function verifyProjectPassword(id: number, password: string) {
+  const project = await prisma.project.findUnique({
+    where: { id },
+    include: { updates: { orderBy: { createdAt: 'desc' } } },
+  })
+
+  if (!project) return { error: 'Project not found.' }
+
+  const bcrypt = await import('bcryptjs')
+  const match = await bcrypt.compare(password, project.clientPassword)
+  if (!match) return { error: 'Incorrect password.' }
+
+  return {
+    clientName: project.clientName,
+    status: project.status,
+    description: project.description,
+    updates: project.updates,
+  }
+}
