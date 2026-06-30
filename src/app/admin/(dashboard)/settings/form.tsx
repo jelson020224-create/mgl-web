@@ -63,24 +63,42 @@ export default function SettingsForm({ settings }: { settings: Record<string, st
           </div>
         </fieldset>
 
-        <fieldset className="border border-gray/20 rounded-lg p-6">
-          <legend className="text-sm font-semibold text-warm-gray px-2">Stats Counter</legend>
+        <fieldset className="border border-gray/20 rounded-lg p-6 bg-terracotta-50/30">
+          <legend className="text-sm font-semibold text-warm-gray px-2 flex items-center gap-2">
+            <svg className="w-4 h-4 text-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            Stats Counter
+          </legend>
+          <p className="text-xs text-gray mb-4 ml-1">These display on the homepage hero. A <code className="bg-gray-light px-1 rounded text-[10px]">+</code> is appended automatically.</p>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-warm-gray mb-1">Projects</label>
-              <input name="stats_projects" defaultValue={settings.stats_projects || '150'} className="input-field" />
+              <label className="block text-sm font-medium text-warm-gray mb-1">Projects <span className="text-gray font-normal">Completed</span></label>
+              <div className="relative">
+                <input name="stats_projects" defaultValue={settings.stats_projects || '150'} className="input-field pr-8" />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray text-sm">+</span>
+              </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-warm-gray mb-1">Years</label>
-              <input name="stats_years" defaultValue={settings.stats_years || '12'} className="input-field" />
+              <label className="block text-sm font-medium text-warm-gray mb-1">Years <span className="text-gray font-normal">Experience</span></label>
+              <div className="relative">
+                <input name="stats_years" defaultValue={settings.stats_years || '12'} className="input-field pr-8" />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray text-sm">+</span>
+              </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-warm-gray mb-1">Clients</label>
-              <input name="stats_clients" defaultValue={settings.stats_clients || '50'} className="input-field" />
+              <label className="block text-sm font-medium text-warm-gray mb-1">Happy <span className="text-gray font-normal">Clients</span></label>
+              <div className="relative">
+                <input name="stats_clients" defaultValue={settings.stats_clients || '50'} className="input-field pr-8" />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray text-sm">+</span>
+              </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-warm-gray mb-1">Team</label>
-              <input name="stats_team" defaultValue={settings.stats_team || '20'} className="input-field" />
+              <label className="block text-sm font-medium text-warm-gray mb-1">Expert <span className="text-gray font-normal">Team</span></label>
+              <div className="relative">
+                <input name="stats_team" defaultValue={settings.stats_team || '20'} className="input-field pr-8" />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray text-sm">+</span>
+              </div>
             </div>
           </div>
         </fieldset>
