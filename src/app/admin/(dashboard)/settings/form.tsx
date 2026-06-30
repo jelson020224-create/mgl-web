@@ -145,7 +145,7 @@ export default function SettingsForm({ settings }: { settings: Record<string, st
         {state.error && <p className="text-red-500 text-sm">{state.error}</p>}
         {state.success && <p className="text-green-500 text-sm">{state.success}</p>}
 
-        <button type="submit" disabled={pending} className="btn-primary flex items-center gap-2">
+        <button type="submit" disabled={pending} className="btn btn-primary flex items-center gap-2">
           {pending && <span className="spinner" />}
           Save Settings
         </button>

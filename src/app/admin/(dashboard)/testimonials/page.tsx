@@ -9,7 +9,7 @@ export default async function TestimonialsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-bold text-warm-gray">Testimonials</h1>
-        <Link href="/admin/testimonials/new" className="btn-primary text-sm">+ Add Testimonial</Link>
+        <Link href="/admin/testimonials/new" className="btn btn-primary text-sm">+ Add Testimonial</Link>
       </div>
 
       {testimonials.filter(t => !t.active).length > 0 && (

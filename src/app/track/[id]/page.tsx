@@ -101,7 +101,7 @@ export default function TrackProjectPage({ params }: { params: Promise<{ id: str
                 required
               />
               {error && <p className="text-red-500 text-sm animate-fade-in">{error}</p>}
-              <button type="submit" disabled={loading} className="btn-primary w-full text-center disabled:opacity-50 flex items-center justify-center gap-2">
+              <button type="submit" disabled={loading} className="btn btn-primary w-full text-center disabled:opacity-50 flex items-center justify-center gap-2">
                 {loading && <span className="spinner" />}
                 {loading ? 'Checking...' : 'View Updates'}
               </button>

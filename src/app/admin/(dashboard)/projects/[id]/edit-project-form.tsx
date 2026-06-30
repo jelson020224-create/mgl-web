@@ -90,7 +90,7 @@ export default function EditProjectForm({ clients }: { clients: Client[] }) {
             </div>
             {updateState.error && <p className="text-red-500 text-sm">{updateState.error}</p>}
             {updateState.success && <p className="text-green-600 text-sm">{updateState.success}</p>}
-            <button type="submit" disabled={updatePending} className="btn-primary disabled:opacity-50">
+            <button type="submit" disabled={updatePending} className="btn btn-primary disabled:opacity-50">
               {updatePending ? 'Saving...' : 'Save Changes'}
             </button>
           </form>
@@ -105,7 +105,7 @@ export default function EditProjectForm({ clients }: { clients: Client[] }) {
             </div>
             {addState.error && <p className="text-red-500 text-sm">{addState.error}</p>}
             {addState.success && <p className="text-green-600 text-sm">{addState.success}</p>}
-            <button type="submit" disabled={addPending} className="btn-primary disabled:opacity-50">
+            <button type="submit" disabled={addPending} className="btn btn-primary disabled:opacity-50">
               {addPending ? 'Adding...' : 'Add Update'}
             </button>
           </form>

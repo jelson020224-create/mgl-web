@@ -51,7 +51,7 @@ export default function NewProjectForm({ clients }: { clients: Client[] }) {
           </div>
           {state.error && <p className="text-red-500 text-sm">{state.error}</p>}
           {state.success && <p className="text-green-600 text-sm">{state.success}</p>}
-          <button type="submit" disabled={pending} className="btn-primary disabled:opacity-50">
+          <button type="submit" disabled={pending} className="btn btn-primary disabled:opacity-50">
             {pending ? 'Creating...' : 'Create Project'}
           </button>
         </form>

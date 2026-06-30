@@ -8,7 +8,7 @@ export default async function AdminProjectsPage() {
     <>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-black">Projects</h1>
-        <Link href="/admin/projects/new" className="btn-primary text-sm">+ New Project</Link>
+        <Link href="/admin/projects/new" className="btn btn-primary text-sm">+ New Project</Link>
       </div>
 
       {projects.length === 0 ? (

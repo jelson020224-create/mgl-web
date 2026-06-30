@@ -36,7 +36,7 @@ export default function MediaUpload() {
       <input type="file" name="file" accept="image/*" required className="block w-full text-sm text-gray file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-terracotta file:text-white hover:file:bg-terracotta/90" />
       <input type="text" name="alt" placeholder="Alt text (optional)" className="input-field" />
       {message && <p className="text-sm text-gray">{message}</p>}
-      <button type="submit" disabled={uploading} className="btn-primary text-sm">
+      <button type="submit" disabled={uploading} className="btn btn-primary text-sm">
         {uploading ? 'Uploading...' : 'Upload'}
       </button>
     </form>

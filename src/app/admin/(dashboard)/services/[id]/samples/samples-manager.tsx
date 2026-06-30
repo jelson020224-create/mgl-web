@@ -41,7 +41,7 @@ function AddSampleForm({ serviceId }: { serviceId: number }) {
       </div>
       {state.error && <p className="text-red-500 text-sm">{state.error}</p>}
       {state.success && <p className="text-green-600 text-sm">{state.success}</p>}
-      <button type="submit" disabled={pending} className="btn-primary disabled:opacity-50">
+      <button type="submit" disabled={pending} className="btn btn-primary disabled:opacity-50">
         {pending ? 'Adding...' : 'Add Sample'}
       </button>
     </form>
