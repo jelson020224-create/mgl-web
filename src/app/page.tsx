@@ -16,7 +16,7 @@ async function getData() {
 function StatCard({ num, label, delay }: { num: string; label: string; delay: number }) {
   return (
     <AnimateOnScroll type="fade-up" delay={delay}>
-      <div className="group text-center p-6 rounded-2xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:bg-white/[0.07] transition-all duration-500">
+      <div className="glass-dark text-center p-6 rounded-2xl shadow-glass border border-white/[0.06]">
         <div className="text-3xl md:text-4xl font-bold gradient-text mb-1.5">{num}</div>
         <div className="text-[11px] text-gray-light/50 uppercase tracking-[0.15em] font-medium">{label}</div>
       </div>
@@ -33,6 +33,8 @@ export default async function HomePage() {
       <section className="relative bg-warm-gray text-white overflow-hidden min-h-screen flex items-center">
         <div className="absolute inset-0 bg-gradient-to-br from-warm-gray via-warm-gray-soft to-[#222]" />
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 25% 25%, white 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
+        {/* Large gradient orb decoration */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-accent rounded-full blur-[150px] opacity-20 animate-glow" />
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-terracotta/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-terracotta/8 rounded-full blur-[100px]" />
         <div className="noise-overlay absolute inset-0" />
@@ -100,27 +102,30 @@ export default async function HomePage() {
               <p className="section-subtitle">Comprehensive solutions for every stage of your project</p>
             </div>
           </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((s, i) => (
-              <AnimateOnScroll key={s.id} type="fade-up" delay={i * 80}>
-                <Link href={`/services/${s.id}`} className="group block">
-                  <div className="card card-shine p-8 h-full relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-terracotta to-terracotta-light scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                    <div className="w-14 h-14 rounded-2xl bg-terracotta-50 flex items-center justify-center mb-5 text-2xl group-hover:bg-terracotta group-hover:text-white transition-all duration-300">
-                      {s.icon}
+          <div className="bento-grid">
+            {services.map((s, i) => {
+              const isWide = i === 0 && services.length > 2
+              return (
+                <AnimateOnScroll key={s.id} type="fade-up" delay={i * 80}>
+                  <Link href={`/services/${s.id}`} className={`group block h-full ${isWide ? 'bento-wide' : ''}`}>
+                    <div className={`glass-card border-gradient card-modern p-8 h-full relative overflow-hidden ${isWide ? 'animate-float' : ''}`}>
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-terracotta to-terracotta-light scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                      <div className="w-14 h-14 rounded-2xl bg-terracotta-50 flex items-center justify-center mb-5 text-2xl group-hover:bg-terracotta group-hover:text-white transition-all duration-300">
+                        {s.icon}
+                      </div>
+                      <h3 className="text-lg font-bold text-warm-gray mb-3 group-hover:text-terracotta transition-colors">{s.title}</h3>
+                      <p className="text-sm text-gray-dark leading-relaxed">{s.description}</p>
+                      <span className="inline-flex items-center gap-1.5 text-xs text-terracotta font-medium mt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
+                        Learn more
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
                     </div>
-                    <h3 className="text-lg font-bold text-warm-gray mb-3 group-hover:text-terracotta transition-colors">{s.title}</h3>
-                    <p className="text-sm text-gray-dark leading-relaxed">{s.description}</p>
-                    <span className="inline-flex items-center gap-1.5 text-xs text-terracotta font-medium mt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
-                      Learn more
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </span>
-                  </div>
-                </Link>
-              </AnimateOnScroll>
-            ))}
+                  </Link>
+                </AnimateOnScroll>
+              )
+            })}
           </div>
           <AnimateOnScroll type="fade-up">
             <div className="text-center mt-12">
@@ -145,10 +150,10 @@ export default async function HomePage() {
                 <p className="section-subtitle">Trusted by homeowners and businesses alike</p>
               </div>
             </AnimateOnScroll>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bento-grid">
               {testimonials.slice(0, 3).map((t, i) => (
                 <AnimateOnScroll key={t.id} type="fade-up" delay={i * 120}>
-                  <div className="card p-8 h-full flex flex-col relative">
+                  <div className={`glass card-modern p-8 flex flex-col relative ${i === 0 ? 'bento-tall' : ''}`}>
                     <div className="absolute -top-3 -left-3 w-12 h-12 bg-terracotta/5 rounded-full flex items-center justify-center">
                       <span className="text-3xl font-serif text-terracotta/30 leading-none">&ldquo;</span>
                     </div>
@@ -186,10 +191,10 @@ export default async function HomePage() {
             </div>
           </AnimateOnScroll>
           {portfolio.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bento-grid">
               {portfolio.map((p, i) => (
                 <AnimateOnScroll key={p.id} type="scale-in" delay={i * 80}>
-                  <div className="card group overflow-hidden">
+                  <div className={`glass-card card-modern group overflow-hidden ${i === 0 ? 'bento-lg' : ''}`}>
                     <div className="aspect-[4/3] overflow-hidden">
                       <img
                         src={p.imageUrl}
@@ -199,7 +204,7 @@ export default async function HomePage() {
                     </div>
                     <div className="p-5 relative">
                       <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-terracotta/30 to-transparent" />
-                      <span className="badge badge-terracotta text-[10px] uppercase tracking-widest font-semibold">{p.category}</span>
+                      <span className="tag tag-terracotta text-[10px] uppercase tracking-widest font-semibold">{p.category}</span>
                       <h3 className="text-base font-bold text-warm-gray mt-2.5">{p.title}</h3>
                     </div>
                   </div>
@@ -207,7 +212,7 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            <div className="card p-16 text-center">
+            <div className="glass-card card-modern p-16 text-center">
               <div className="w-16 h-16 rounded-2xl bg-terracotta-50 flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-terracotta/60" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
