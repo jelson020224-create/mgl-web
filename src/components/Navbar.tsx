@@ -50,8 +50,14 @@ export default function Navbar({ settings }: NavbarProps) {
     }`}>
       <div className="section-container">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="shrink-0">
-            <SiteLogo settings={settings} variant="full" />
+          <Link href="/" className="flex items-center gap-3 shrink-0 group">
+            <div className="relative">
+              <SiteLogo settings={settings} variant="full" className="h-10" />
+            </div>
+            <div className="leading-tight hidden sm:block">
+              <span className="block text-sm font-bold tracking-tight text-white">MGL</span>
+              <span className="block text-[9px] tracking-[0.15em] uppercase text-gray-light/60 leading-snug">Construction<br />&amp; Interior</span>
+            </div>
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
