@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BrandMark } from './brand-mark'
+import Image from 'next/image'
 
 interface FooterProps {
   settings: Record<string, string>
@@ -12,7 +12,7 @@ export default function Footer({ settings }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <BrandMark size={32} variant="light" />
+              <Image src="/LOGO-MGL.png" alt="MGL Logo" width={140} height={42} className="h-9 w-auto object-contain brightness-0 invert" />
             </Link>
             <p className="text-sm text-gray/60 leading-relaxed max-w-xs">
               Building dreams with precision and passion. From concept to completion, we deliver excellence in every project.

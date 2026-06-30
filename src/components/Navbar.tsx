@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { BrandMark } from './brand-mark'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -35,7 +35,7 @@ export default function Navbar({ settings }: NavbarProps) {
       <div className="section-container">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="shrink-0">
-            <BrandMark size={32} variant="light" />
+            <Image src="/LOGO-MGL.png" alt="MGL Logo" width={120} height={36} className="h-8 w-auto object-contain" />
           </Link>
 
           <div className="hidden md:flex items-center gap-0.5">
