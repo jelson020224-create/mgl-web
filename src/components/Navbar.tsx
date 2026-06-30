@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/track', label: 'Track' },
   { href: '/contact', label: 'Contact' },
+  { href: '/dashboard', label: 'Dashboard' },
 ]
 
 interface NavbarProps {

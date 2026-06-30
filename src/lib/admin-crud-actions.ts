@@ -10,13 +10,14 @@ export async function createProject(prevState: { error: string; success: string 
   const clientPassword = formData.get('clientPassword') as string
   const description = formData.get('description') as string
   const status = formData.get('status') as string || 'in-progress'
+  const clientId = formData.get('clientId') ? Number(formData.get('clientId')) : null
 
   if (!clientName || !clientPassword) return { error: 'Name and password are required.', success: '' }
 
   const hashedPassword = await bcrypt.hash(clientPassword, 10)
 
   await prisma.project.create({
-    data: { clientName, clientPassword: hashedPassword, description, status },
+    data: { clientName, clientPassword: hashedPassword, description, status, clientId },
   })
 
   revalidatePath('/admin/projects')
@@ -29,10 +30,11 @@ export async function updateProject(prevState: { error: string; success: string 
   const clientPassword = formData.get('clientPassword') as string
   const description = formData.get('description') as string
   const status = formData.get('status') as string
+  const clientId = formData.get('clientId') ? Number(formData.get('clientId')) : null
 
   if (!clientName) return { error: 'Name is required.', success: '' }
 
-  const data: any = { clientName, description, status }
+  const data: any = { clientName, description, status, clientId }
   if (clientPassword) {
     data.clientPassword = await bcrypt.hash(clientPassword, 10)
   }

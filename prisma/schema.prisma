@@ -48,6 +48,15 @@ model Testimonial {
   createdAt DateTime @default(now())
 }
 
+model Client {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  projects  Project[]
+}
+
 model Project {
   id             Int            @id @default(autoincrement())
   clientName     String
@@ -57,6 +66,8 @@ model Project {
   startDate      DateTime       @default(now())
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
+  clientId       Int?
+  client         Client?        @relation(fields: [clientId], references: [id], onDelete: SetNull)
   updates        ProjectUpdate[]
 }
 

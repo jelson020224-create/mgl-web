@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { verifyProjectPassword } from './actions'
+import { useState, useEffect } from 'react'
+import { verifyProjectPassword, getProjectForAuthedClient } from './actions'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
 
 export default function TrackProjectPage({ params }: { params: Promise<{ id: string }> }) {
@@ -12,6 +12,12 @@ export default function TrackProjectPage({ params }: { params: Promise<{ id: str
   const [loading, setLoading] = useState(false)
 
   params.then((p) => setId(p.id))
+
+  useEffect(() => {
+    getProjectForAuthedClient(Number(id)).then((data) => {
+      if (data) setProject(data)
+    })
+  }, [id])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
