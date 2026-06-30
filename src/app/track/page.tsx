@@ -44,30 +44,32 @@ export default async function TrackPage({
         </div>
       </section>
 
-      <section className="section bg-cream min-h-[40vh]">
+      <section className="section bg-cream">
         <div className="section-container">
           {q && results.length === 0 && (
             <p className="text-center text-gray animate-fade-in">No projects found for &quot;{q}&quot;. Check the spelling or contact us.</p>
           )}
           {results.length > 0 && (
-            <div className="space-y-4">
+            <div>
               <p className="text-sm text-gray mb-4 animate-fade-in">{results.length} project(s) found. Click to view updates.</p>
-              {results.map((p, i) => (
-                <AnimateOnScroll key={p.id} type="fade-up" delay={i * 80}>
-                  <a
-                    href={`/track/${p.id}`}
-                    className="card-modern shadow-soft p-6 flex items-center justify-between group hover:border-terracotta/50 border border-transparent"
-                  >
-                    <div>
-                      <h3 className="text-lg font-bold text-warm-gray group-hover:text-terracotta transition-colors">{p.clientName}</h3>
-                      <span className={`text-xs font-semibold uppercase ${p.status === 'completed' ? 'text-green-600' : 'text-terracotta'}`}>
-                        {p.status}
-                      </span>
-                    </div>
-                    <span className="text-terracotta group-hover:translate-x-2 transition-transform duration-300">→</span>
-                  </a>
-                </AnimateOnScroll>
-              ))}
+              <div className="space-y-4">
+                {results.map((p, i) => (
+                  <AnimateOnScroll key={p.id} type="fade-up" delay={i * 80}>
+                    <a
+                      href={`/track/${p.id}`}
+                      className="card-modern shadow-soft p-6 flex items-center justify-between group hover:border-terracotta/50 border border-transparent"
+                    >
+                      <div>
+                        <h3 className="text-lg font-bold text-warm-gray group-hover:text-terracotta transition-colors">{p.clientName}</h3>
+                        <span className={`text-xs font-semibold uppercase ${p.status === 'completed' ? 'text-green-600' : 'text-terracotta'}`}>
+                          {p.status}
+                        </span>
+                      </div>
+                      <span className="text-terracotta group-hover:translate-x-2 transition-transform duration-300">→</span>
+                    </a>
+                  </AnimateOnScroll>
+                ))}
+              </div>
             </div>
           )}
         </div>

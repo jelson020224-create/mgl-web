@@ -12,8 +12,8 @@ export default function Footer({ settings }: FooterProps) {
     <footer className="relative bg-warm-gray overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-terracotta via-terracotta/50 to-transparent" />
 
-      <div className="section-container py-[clamp(3rem,5vw,5rem)]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[clamp(1.5rem,3vw,3rem)]">
+      <div className="section-container py-[clamp(4rem,6vw,6rem)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[clamp(2rem,3vw,3rem)]">
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-5">
               <SiteLogo settings={settings} variant="full" className="h-10" />
@@ -92,7 +92,7 @@ export default function Footer({ settings }: FooterProps) {
       </div>
 
       <div className="border-t border-white/5">
-        <div className="section-container py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="section-container py-6 md:py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray/40">&copy; {new Date().getFullYear()} {settings.company_name || 'MGL Construction'}. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/services" className="text-xs text-gray/40 hover:text-white/60 transition-colors">Services</Link>
