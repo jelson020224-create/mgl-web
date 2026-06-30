@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 import { ToastProvider } from "@/components/ui/toast";
 import { getSiteSettings } from "@/lib/queries";
 import Script from "next/script";
@@ -41,6 +42,7 @@ export default async function RootLayout({
           <Navbar settings={settings} />
           <main className="flex-1 pt-16">{children}</main>
           <Footer settings={settings} />
+          <CookieConsent />
         </ToastProvider>
       </body>
     </html>
