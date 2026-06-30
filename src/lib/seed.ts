@@ -27,23 +27,23 @@ export async function seedAdmin() {
   })
 
   const existingSettings = await prisma.siteSetting.findFirst()
-  if (existingSettings) return
-
-  await prisma.siteSetting.createMany({
-    data: [
-      { key: 'company_name', value: 'MGL Construction & Interior' },
-      { key: 'company_email', value: 'info@mglconstruction.com' },
-      { key: 'company_phone', value: '(123) 456-7890' },
-      { key: 'company_address', value: '123 Construction Ave, Building City' },
-      { key: 'hero_title', value: 'Building Your Vision From the Ground Up' },
-      { key: 'hero_subtitle', value: 'MGL Construction & Interior brings together draftsmen, architects, and engineers to deliver exceptional residential and commercial spaces.' },
-      { key: 'about_content', value: '<h2>Who We Are</h2><p>MGL Construction & Interior has been delivering exceptional building and design solutions for over a decade. Our team of draftsmen, architects, and engineers work collaboratively to bring your vision to life.</p><h3>Our Mission</h3><p>To provide high-quality construction and interior design services that exceed client expectations through innovation, integrity, and attention to detail.</p><h3>Why Choose Us</h3><ul><li><strong>Experienced Team:</strong> Over 12 years of industry experience</li><li><strong>Integrated Services:</strong> From drafting to construction, we handle it all</li><li><strong>Client-Focused:</strong> Your vision drives every decision we make</li><li><strong>Quality Assurance:</strong> Rigorous quality control at every stage</li></ul>' },
-      { key: 'stats_projects', value: '150' },
-      { key: 'stats_years', value: '12' },
-      { key: 'stats_clients', value: '50' },
-      { key: 'stats_team', value: '20' },
-    ],
-  })
+  if (!existingSettings) {
+    await prisma.siteSetting.createMany({
+      data: [
+        { key: 'company_name', value: 'MGL Construction & Interior' },
+        { key: 'company_email', value: 'info@mglconstruction.com' },
+        { key: 'company_phone', value: '(123) 456-7890' },
+        { key: 'company_address', value: '123 Construction Ave, Building City' },
+        { key: 'hero_title', value: 'Building Your Vision From the Ground Up' },
+        { key: 'hero_subtitle', value: 'MGL Construction & Interior brings together draftsmen, architects, and engineers to deliver exceptional residential and commercial spaces.' },
+        { key: 'about_content', value: '<h2>Who We Are</h2><p>MGL Construction & Interior has been delivering exceptional building and design solutions for over a decade. Our team of draftsmen, architects, and engineers work collaboratively to bring your vision to life.</p><h3>Our Mission</h3><p>To provide high-quality construction and interior design services that exceed client expectations through innovation, integrity, and attention to detail.</p><h3>Why Choose Us</h3><ul><li><strong>Experienced Team:</strong> Over 12 years of industry experience</li><li><strong>Integrated Services:</strong> From drafting to construction, we handle it all</li><li><strong>Client-Focused:</strong> Your vision drives every decision we make</li><li><strong>Quality Assurance:</strong> Rigorous quality control at every stage</li></ul>' },
+        { key: 'stats_projects', value: '150' },
+        { key: 'stats_years', value: '12' },
+        { key: 'stats_clients', value: '50' },
+        { key: 'stats_team', value: '20' },
+      ],
+    })
+  }
 
   await prisma.testimonial.createMany({
     data: [
@@ -51,5 +51,27 @@ export async function seedAdmin() {
       { clientName: 'Mark Rivera', role: 'Business Owner', content: 'Professional, punctual, and perfectionists. Our commercial space was delivered on time and under budget. Highly recommend.', rating: 5 },
       { clientName: 'Emily Chen', role: 'Architect', content: 'Working alongside MGL on multiple projects has been a pleasure. Their drafting precision and project management are top-tier.', rating: 5 },
     ],
+    skipDuplicates: true,
+  })
+
+  await prisma.teamMember.createMany({
+    data: [
+      { title: 'John Smith', description: 'Founder & Lead Architect — 20+ years transforming residential and commercial visions into reality.', icon: '👔', order: 1 },
+      { title: 'Maria Lopez', description: 'Senior Interior Designer — Specializes in warm, functional spaces that blend modern aesthetics with timeless comfort.', icon: '🎨', order: 2 },
+      { title: 'David Chen', description: 'Project Manager — Keeps every build on schedule and under budget with precision and clear communication.', icon: '📋', order: 3 },
+      { title: 'Aisha Patel', description: 'Lead Draftsman — Expert CAD technician turning rough sketches into construction-ready plans.', icon: '📐', order: 4 },
+    ],
+    skipDuplicates: true,
+  })
+
+  await prisma.approachStep.createMany({
+    data: [
+      { step: '01', title: 'Consultation', order: 1 },
+      { step: '02', title: 'Design & Drafting', order: 2 },
+      { step: '03', title: 'Permitting & Approvals', order: 3 },
+      { step: '04', title: 'Construction & Execution', order: 4 },
+      { step: '05', title: 'Final Walkthrough', order: 5 },
+    ],
+    skipDuplicates: true,
   })
 }
