@@ -35,18 +35,18 @@ export default function Navbar({ settings }: NavbarProps) {
       <div className="section-container">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="shrink-0">
-            <Image src="/LOGO-MGL.png" alt="MGL Logo" width={120} height={36} className="h-8 w-auto object-contain" />
+            <Image src="/LOGO-MGL.png" alt="MGL Logo" width={150} height={45} className="h-10 w-auto object-contain" />
           </Link>
 
-          <div className="hidden md:flex items-center gap-0.5">
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className="px-3 py-2 text-sm font-medium text-gray-light/70 hover:text-white transition-colors rounded-lg hover:bg-white/[0.06] relative group"
+                className="px-4 py-2 text-sm font-medium text-gray-light/70 hover:text-white transition-colors rounded-lg hover:bg-white/[0.06] relative group"
               >
                 {l.label}
-                <span className="absolute inset-x-3 -bottom-0 h-0.5 bg-terracotta rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                <span className="absolute inset-x-4 -bottom-0 h-0.5 bg-terracotta rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
               </Link>
             ))}
           </div>

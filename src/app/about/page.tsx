@@ -15,7 +15,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <section className="relative bg-warm-gray text-white overflow-hidden py-24">
+      <section className="relative bg-warm-gray text-white overflow-hidden hero-section">
         <div className="absolute inset-0 bg-gradient-to-br from-warm-gray via-warm-gray-soft to-[#222]" />
         <div className="absolute inset-0 opacity-[0.03] pattern-grid" />
         <div className="absolute top-1/4 -right-32 w-80 h-80 bg-terracotta/8 rounded-full blur-[100px]" />
@@ -26,7 +26,7 @@ export default async function AboutPage() {
             <h1 className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-6">
               About <span className="gradient-text">MGL</span>
             </h1>
-            <div className="text-lg text-gray-light/70 max-w-3xl mx-auto leading-relaxed font-light"
+            <div className="text-lg text-gray-light/70 max-w-3xl mx-auto font-light"
               dangerouslySetInnerHTML={{ __html: settings.about_content || '<p>We are a full-service construction and interior design firm built on craftsmanship, creativity, and collaboration.</p>' }} />
           </AnimateOnScroll>
         </div>

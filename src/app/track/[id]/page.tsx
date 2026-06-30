@@ -42,8 +42,8 @@ export default function TrackProjectPage({ params }: { params: Promise<{ id: str
   if (project) {
     return (
       <>
-        <section className="bg-warm-gray text-white py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="bg-warm-gray text-white py-20 md:py-28">
+          <div className="section-container">
             <AnimateOnScroll type="fade-up">
               <h1 className="text-3xl font-bold">{project.clientName}</h1>
               <span className={`text-sm font-semibold uppercase ${project.status === 'completed' ? 'text-green-400' : 'text-terracotta'}`}>
@@ -54,8 +54,8 @@ export default function TrackProjectPage({ params }: { params: Promise<{ id: str
           </div>
         </section>
 
-        <section className="py-16 bg-cream">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-20 md:py-28 bg-cream">
+          <div className="section-container">
             <AnimateOnScroll type="fade-up">
               <h2 className="text-2xl font-bold text-warm-gray mb-8">Project Updates</h2>
             </AnimateOnScroll>
@@ -85,8 +85,8 @@ export default function TrackProjectPage({ params }: { params: Promise<{ id: str
   }
 
   return (
-    <section className="py-20 bg-cream min-h-[50vh] flex items-center justify-center">
-      <div className="max-w-md mx-auto px-4 w-full">
+    <section className="section bg-cream min-h-[50vh] flex items-center justify-center">
+      <div className="w-full max-w-md mx-auto px-4">
         <AnimateOnScroll type="scale-in">
           <div className="card p-8">
             <h2 className="text-xl font-bold text-warm-gray mb-2">Enter Project Password</h2>

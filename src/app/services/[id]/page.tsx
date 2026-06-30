@@ -14,7 +14,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   return (
     <>
-      <section className="relative bg-warm-gray text-white overflow-hidden py-24">
+      <section className="relative bg-warm-gray text-white overflow-hidden hero-section">
         <div className="absolute inset-0 bg-gradient-to-br from-warm-gray via-warm-gray-soft to-[#222]" />
         <div className="absolute inset-0 opacity-[0.03] pattern-grid" />
         <div className="absolute top-0 -right-32 w-80 h-80 bg-terracotta/8 rounded-full blur-[100px]" />

@@ -20,8 +20,8 @@ export default async function TrackPage({
 
   return (
     <>
-      <section className="bg-warm-gray text-white py-20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="bg-warm-gray text-white hero-section">
+        <div className="section-container text-center">
           <AnimateOnScroll type="fade-up">
             <h1 className="text-5xl font-bold mb-6">Track Your <span className="text-terracotta">Project</span></h1>
           </AnimateOnScroll>
@@ -44,8 +44,8 @@ export default async function TrackPage({
         </div>
       </section>
 
-      <section className="py-20 bg-cream min-h-[40vh]">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section bg-cream min-h-[40vh]">
+        <div className="section-container">
           {q && results.length === 0 && (
             <p className="text-center text-gray animate-fade-in">No projects found for &quot;{q}&quot;. Check the spelling or contact us.</p>
           )}

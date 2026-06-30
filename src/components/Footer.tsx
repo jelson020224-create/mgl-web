@@ -8,8 +8,8 @@ interface FooterProps {
 export default function Footer({ settings }: FooterProps) {
   return (
     <footer className="bg-warm-gray border-t border-white/5">
-      <div className="section-container py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="section-container py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-4">
               <Image src="/LOGO-MGL.png" alt="MGL Logo" width={140} height={42} className="h-9 w-auto object-contain brightness-0 invert" />

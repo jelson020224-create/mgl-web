@@ -72,11 +72,11 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="section-container pb-16 md:pb-24">
-            <div className="divider-dash mb-10">
+          <div className="section-container pb-20 md:pb-28">
+            <div className="divider-dash mb-12">
               <span className="divider-dash-dot" />
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
               <StatCard num={(settings.stats_projects || '150') + '+'} label="Projects Completed" delay={600} />
               <StatCard num={(settings.stats_years || '12') + '+'} label="Years Experience" delay={700} />
               <StatCard num={(settings.stats_clients || '50') + '+'} label="Happy Clients" delay={800} />
