@@ -168,10 +168,23 @@ body {
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.75rem;
   background: var(--terracotta);
   color: white;
   border-radius: 0.5rem;
+  border: none;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1.4;
   box-shadow: 0 4px 14px rgba(199, 106, 78, 0.3);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 .btn-primary:hover:not(:disabled) {
   background: var(--terracotta-dark);
@@ -181,9 +194,22 @@ body {
 .btn-primary:active:not(:disabled) { transform: translateY(0); }
 
 .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.75rem;
   background: var(--warm-gray);
   color: white;
   border-radius: 0.5rem;
+  border: none;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 .btn-secondary:hover:not(:disabled) {
   background: var(--warm-gray-soft);
@@ -191,10 +217,22 @@ body {
 }
 
 .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.75rem;
   border: 1.5px solid var(--terracotta);
   color: var(--terracotta);
   background: transparent;
   border-radius: 0.5rem;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 .btn-outline:hover:not(:disabled) {
   background: var(--terracotta);
@@ -203,9 +241,22 @@ body {
 }
 
 .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.75rem;
   color: var(--gray-dark);
   background: transparent;
   border-radius: 0.5rem;
+  border: none;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 .btn-ghost:hover:not(:disabled) {
   background: var(--warm-gray-50);
