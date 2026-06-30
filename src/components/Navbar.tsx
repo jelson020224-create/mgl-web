@@ -68,7 +68,7 @@ export default function Navbar({ settings }: NavbarProps) {
           </div>
 
           <button
-            className="md:hidden relative w-10 h-10 flex items-center justify-center text-gray-light hover:text-white transition-colors z-50"
+            className={`md:hidden relative w-10 h-10 flex items-center justify-center text-gray-light hover:text-white transition-colors z-50 ${open ? 'hidden' : ''}`}
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
