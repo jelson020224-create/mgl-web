@@ -10,6 +10,8 @@ export async function submitContact(prevState: { message: string; error?: string
   const phone = formData.get('phone') as string
   const message = formData.get('message') as string
 
+  const cleanedPhone = phone ? phone.replace(/\D/g, '') : ''
+
   const rl = rateLimit(`contact:${email}`, 3, 60000)
   if (!rl.allowed) {
     return { message: '', error: 'Too many requests. Please wait before sending another message.' }
@@ -21,7 +23,7 @@ export async function submitContact(prevState: { message: string; error?: string
 
   try {
     await prisma.contactMessage.create({
-      data: { name, email, phone, message },
+      data: { name, email, phone: cleanedPhone, message },
     })
     revalidatePath('/admin/messages')
     return { message: 'Thank you! We will get back to you soon.', error: '' }

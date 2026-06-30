@@ -3,8 +3,12 @@ import { unlink } from 'fs/promises'
 import { join } from 'path'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { getSession } from '@/lib/session'
 
 export async function POST(req: Request) {
+  const session = await getSession()
+  if (!session) return Response.json({ error: 'Unauthorized' }, { status: 401 })
+
   const url = new URL(req.url)
   const id = Number(url.searchParams.get('id'))
   if (!id) return Response.json({ error: 'Invalid id' }, { status: 400 })

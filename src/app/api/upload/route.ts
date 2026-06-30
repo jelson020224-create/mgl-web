@@ -1,8 +1,12 @@
 import prisma from '@/lib/prisma'
 import { writeFile, mkdir } from 'fs/promises'
 import { join } from 'path'
+import { getSession } from '@/lib/session'
 
 export async function POST(req: Request) {
+  const session = await getSession()
+  if (!session) return Response.json({ error: 'Unauthorized' }, { status: 401 })
+
   try {
     const formData = await req.formData()
     const file = formData.get('file') as File

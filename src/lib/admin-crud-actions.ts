@@ -6,110 +6,150 @@ import { redirect } from 'next/navigation'
 import bcrypt from 'bcryptjs'
 
 export async function createProject(prevState: { error: string; success: string }, formData: FormData) {
-  const clientName = formData.get('clientName') as string
-  const clientPassword = formData.get('clientPassword') as string
-  const description = formData.get('description') as string
-  const status = formData.get('status') as string || 'in-progress'
-  const clientId = formData.get('clientId') ? Number(formData.get('clientId')) : null
+  try {
+    const clientName = formData.get('clientName') as string
+    const clientPassword = formData.get('clientPassword') as string
+    const description = formData.get('description') as string
+    const status = formData.get('status') as string || 'in-progress'
+    const clientId = formData.get('clientId') ? Number(formData.get('clientId')) : null
 
-  if (!clientName || !clientPassword) return { error: 'Name and password are required.', success: '' }
+    if (!clientName || !clientPassword) return { error: 'Name and password are required.', success: '' }
 
-  const hashedPassword = await bcrypt.hash(clientPassword, 10)
+    const hashedPassword = await bcrypt.hash(clientPassword, 10)
 
-  await prisma.project.create({
-    data: { clientName, clientPassword: hashedPassword, description, status, clientId },
-  })
+    await prisma.project.create({
+      data: { clientName, clientPassword: hashedPassword, description, status, clientId },
+    })
 
-  revalidatePath('/admin/projects')
-  redirect('/admin/projects')
+    revalidatePath('/admin/projects')
+    redirect('/admin/projects')
+  } catch {
+    return { error: 'Failed to create project.', success: '' }
+  }
 }
 
 export async function updateProject(prevState: { error: string; success: string }, formData: FormData) {
-  const projectId = Number(formData.get('projectId'))
-  const clientName = formData.get('clientName') as string
-  const clientPassword = formData.get('clientPassword') as string
-  const description = formData.get('description') as string
-  const status = formData.get('status') as string
-  const clientId = formData.get('clientId') ? Number(formData.get('clientId')) : null
+  try {
+    const projectId = Number(formData.get('projectId'))
+    const clientName = formData.get('clientName') as string
+    const clientPassword = formData.get('clientPassword') as string
+    const description = formData.get('description') as string
+    const status = formData.get('status') as string
+    const clientId = formData.get('clientId') ? Number(formData.get('clientId')) : null
 
-  if (!clientName) return { error: 'Name is required.', success: '' }
+    if (!clientName) return { error: 'Name is required.', success: '' }
 
-  const data: any = { clientName, description, status, clientId }
-  if (clientPassword) {
-    data.clientPassword = await bcrypt.hash(clientPassword, 10)
+    const data: any = { clientName, description, status, clientId }
+    if (clientPassword) {
+      data.clientPassword = await bcrypt.hash(clientPassword, 10)
+    }
+
+    await prisma.project.update({ where: { id: projectId }, data })
+    revalidatePath(`/admin/projects/${projectId}`)
+    revalidatePath('/admin/projects')
+    return { error: '', success: 'Project updated.' }
+  } catch {
+    return { error: 'Failed to update project.', success: '' }
   }
-
-  await prisma.project.update({ where: { id: projectId }, data })
-  revalidatePath(`/admin/projects/${projectId}`)
-  revalidatePath('/admin/projects')
-  return { error: '', success: 'Project updated.' }
 }
 
 export async function addUpdate(prevState: { error: string; success: string }, formData: FormData) {
-  const projectId = Number(formData.get('projectId'))
-  const content = formData.get('content') as string
+  try {
+    const projectId = Number(formData.get('projectId'))
+    const content = formData.get('content') as string
 
-  if (!content) return { error: 'Content is required.', success: '' }
+    if (!content) return { error: 'Content is required.', success: '' }
 
-  await prisma.projectUpdate.create({ data: { projectId, content } })
-  revalidatePath(`/admin/projects/${projectId}`)
-  return { error: '', success: 'Update added.' }
+    await prisma.projectUpdate.create({ data: { projectId, content } })
+    revalidatePath(`/admin/projects/${projectId}`)
+    return { error: '', success: 'Update added.' }
+  } catch {
+    return { error: 'Failed to add update.', success: '' }
+  }
 }
 
 export async function deleteProject(projectId: string) {
-  await prisma.project.delete({ where: { id: Number(projectId) } })
-  revalidatePath('/admin/projects')
-  redirect('/admin/projects')
+  try {
+    await prisma.project.delete({ where: { id: Number(projectId) } })
+    revalidatePath('/admin/projects')
+    redirect('/admin/projects')
+  } catch {
+    return { error: 'Failed to delete project.', success: '' }
+  }
 }
 
 export async function updateService(prevState: { error: string; success: string }, formData: FormData) {
-  const id = formData.get('id') as string
-  const title = formData.get('title') as string
-  const description = formData.get('description') as string
-  const icon = formData.get('icon') as string
-  const order = parseInt(formData.get('order') as string) || 0
+  try {
+    const id = formData.get('id') as string
+    const title = formData.get('title') as string
+    const description = formData.get('description') as string
+    const icon = formData.get('icon') as string
+    const order = parseInt(formData.get('order') as string) || 0
 
-  if (!title) return { error: 'Title is required.', success: '' }
+    if (!title) return { error: 'Title is required.', success: '' }
 
-  if (id) {
-    await prisma.service.update({ where: { id: Number(id) }, data: { title, description, icon, order } })
-  } else {
-    await prisma.service.create({ data: { title, description, icon, order } })
+    if (id) {
+      await prisma.service.update({ where: { id: Number(id) }, data: { title, description, icon, order } })
+    } else {
+      await prisma.service.create({ data: { title, description, icon, order } })
+    }
+
+    revalidatePath('/admin/services')
+    return { error: '', success: 'Service saved.' }
+  } catch {
+    return { error: 'Failed to save service.', success: '' }
   }
-
-  revalidatePath('/admin/services')
-  return { error: '', success: 'Service saved.' }
 }
 
 export async function deleteService(id: number) {
-  await prisma.service.delete({ where: { id } })
-  revalidatePath('/admin/services')
+  try {
+    await prisma.service.delete({ where: { id } })
+    revalidatePath('/admin/services')
+  } catch {
+    return { error: 'Failed to delete service.', success: '' }
+  }
 }
 
 export async function addPortfolioItem(prevState: { error: string; success: string }, formData: FormData) {
-  const title = formData.get('title') as string
-  const category = formData.get('category') as string
-  const description = formData.get('description') as string
-  const imageUrl = formData.get('imageUrl') as string
+  try {
+    const title = formData.get('title') as string
+    const category = formData.get('category') as string
+    const description = formData.get('description') as string
+    const imageUrl = formData.get('imageUrl') as string
 
-  if (!title) return { error: 'Title is required.', success: '' }
+    if (!title) return { error: 'Title is required.', success: '' }
 
-  await prisma.portfolioItem.create({ data: { title, category, description, imageUrl: imageUrl || '/placeholder.jpg' } })
-  revalidatePath('/admin/portfolio')
-  return { error: '', success: 'Portfolio item added.' }
+    await prisma.portfolioItem.create({ data: { title, category, description, imageUrl: imageUrl || '/placeholder.jpg' } })
+    revalidatePath('/admin/portfolio')
+    return { error: '', success: 'Portfolio item added.' }
+  } catch {
+    return { error: 'Failed to add portfolio item.', success: '' }
+  }
 }
 
 export async function deletePortfolioItem(id: number) {
-  await prisma.portfolioItem.delete({ where: { id } })
-  revalidatePath('/admin/portfolio')
+  try {
+    await prisma.portfolioItem.delete({ where: { id } })
+    revalidatePath('/admin/portfolio')
+  } catch {
+    return { error: 'Failed to delete portfolio item.', success: '' }
+  }
 }
 
 export async function markMessageRead(id: number) {
-  await prisma.contactMessage.update({ where: { id }, data: { read: true } })
-  revalidatePath('/admin/messages')
+  try {
+    await prisma.contactMessage.update({ where: { id }, data: { read: true } })
+    revalidatePath('/admin/messages')
+  } catch {
+    return { error: 'Failed to mark message as read.', success: '' }
+  }
 }
 
 export async function deleteMessage(id: number) {
-  await prisma.contactMessage.delete({ where: { id } })
-  revalidatePath('/admin/messages')
+  try {
+    await prisma.contactMessage.delete({ where: { id } })
+    revalidatePath('/admin/messages')
+  } catch {
+    return { error: 'Failed to delete message.', success: '' }
+  }
 }

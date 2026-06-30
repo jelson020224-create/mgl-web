@@ -1,6 +1,7 @@
 import { SignJWT, jwtVerify } from 'jose'
 
-const secretKey = process.env.SESSION_SECRET || 'fallback-secret-change-me'
+const secretKey = process.env.SESSION_SECRET
+if (!secretKey) throw new Error('SESSION_SECRET environment variable is not set')
 const encodedKey = new TextEncoder().encode(secretKey)
 
 interface OtpPayload {
