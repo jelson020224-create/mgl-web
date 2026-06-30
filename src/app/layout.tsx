@@ -33,7 +33,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`h-full ${playfair.variable} ${inter.variable}`}>
-      <body className="min-h-full flex flex-col font-sans" style={{ fontFamily: "var(--font-inter), 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}>
+      <body className="min-h-full flex flex-col font-sans">
         {process.env.PLAUSIBLE_URL && (
           <Script defer data-domain={process.env.NEXT_PUBLIC_SITE_URL || ''} src={process.env.PLAUSIBLE_URL} />
         )}

@@ -13,31 +13,39 @@ function LoginFormInner() {
   const registered = searchParams.get('registered')
 
   return (
-    <div className="min-h-screen bg-cream flex items-center justify-center px-4 pt-24">
-      <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
+    <div className="min-h-screen bg-cream flex items-center justify-center px-4 pt-20 pb-20">
+      <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-black">Client Login</h1>
-          <p className="text-gray text-sm mt-2">Sign in to track your projects</p>
+          <Link href="/" className="inline-flex items-center gap-2 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-terracotta flex items-center justify-center text-white font-bold text-sm">M</div>
+          </Link>
+          <h1 className="text-2xl font-bold text-warm-gray">Welcome back</h1>
+          <p className="text-sm text-gray-dark mt-1">Sign in to your client dashboard</p>
         </div>
-        {registered && (
-          <p className="text-green-600 text-sm text-center mb-4 bg-green-50 py-2 rounded-lg">
-            Account created successfully. Please sign in.
-          </p>
-        )}
-        <form action={formAction} className="space-y-4">
-          <div>
-            <label className="block text-sm font-semibold text-black mb-1">Email</label>
-            <input name="email" type="email" required className="input-field" />
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-black mb-1">Password</label>
-            <input name="password" type="password" required className="input-field" />
-          </div>
-          {state.error && <p className="text-red-500 text-sm text-center">{state.error}</p>}
-          <button type="submit" disabled={pending} className="btn-primary w-full text-center disabled:opacity-50">
-            {pending ? 'Signing in...' : 'Sign In'}
-          </button>
-        </form>
+
+        <div className="card p-6">
+          {registered && (
+            <div className="mb-4 px-4 py-3 rounded-lg bg-emerald-50 border border-emerald-200 text-sm text-emerald-700 text-center">
+              Account created. Please sign in.
+            </div>
+          )}
+          <form action={formAction} className="space-y-4">
+            <div className="input-group">
+              <label className="input-label" htmlFor="email">Email</label>
+              <input id="email" name="email" type="email" required autoComplete="email" className="input-field" placeholder="you@example.com" />
+            </div>
+            <div className="input-group">
+              <label className="input-label" htmlFor="password">Password</label>
+              <input id="password" name="password" type="password" required autoComplete="current-password" className="input-field" placeholder="Enter your password" />
+            </div>
+            {state.error && <p className="form-error text-center">{state.error}</p>}
+            <button type="submit" disabled={pending} className="btn btn-primary w-full justify-center">
+              {pending && <span className="spinner" />}
+              {pending ? 'Signing in...' : 'Sign in'}
+            </button>
+          </form>
+        </div>
+
         <p className="text-center text-sm text-gray mt-6">
           Don&apos;t have an account?{' '}
           <Link href="/register" className="text-terracotta hover:underline font-medium">Create one</Link>
@@ -49,7 +57,7 @@ function LoginFormInner() {
 
 function LoginForm() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-cream flex items-center justify-center px-4 pt-24"><div className="text-gray">Loading...</div></div>}>
+    <Suspense fallback={<div className="min-h-screen bg-cream flex items-center justify-center"><div className="skeleton w-80 h-80 rounded-xl" /></div>}>
       <LoginFormInner />
     </Suspense>
   )
