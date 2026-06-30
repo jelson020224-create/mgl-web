@@ -95,6 +95,12 @@ export async function saveSettings(prevState: { error: string; success: string }
     }
 
     revalidatePath('/admin/settings')
+    revalidatePath('/')
+    revalidatePath('/about')
+    revalidatePath('/services')
+    revalidatePath('/portfolio')
+    revalidatePath('/contact')
+    revalidatePath('/track')
     return { error: '', success: 'Settings saved.' }
   } catch {
     return { error: 'Failed to save settings.', success: '' }
