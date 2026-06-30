@@ -9,8 +9,7 @@ export default function Footer({ settings }: FooterProps) {
   const linkClass = "text-sm text-gray/60 hover:text-white transition-colors duration-200"
 
   return (
-    <footer className="relative bg-warm-gray overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-terracotta via-terracotta/50 to-transparent" />
+    <footer className="relative bg-warm-gray overflow-hidden border-t border-white/[0.07]">
 
       <div className="section-container py-[clamp(4rem,6vw,6rem)]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[clamp(2rem,3vw,3rem)]">
@@ -18,7 +17,7 @@ export default function Footer({ settings }: FooterProps) {
             <Link href="/" className="inline-block mb-5">
               <SiteLogo settings={settings} variant="full" className="h-10" />
             </Link>
-            <p className="text-sm text-gray/60 leading-relaxed pr-4">
+            <p className="text-sm text-gray/60 leading-relaxed pr-6">
               Building dreams with precision and passion. From concept to completion, we deliver excellence in every project.
             </p>
           </div>
