@@ -1,6 +1,35 @@
 # Session Change Log
 
-## 2026-06-30 — Layout Modernization & Review System
+## 2026-06-30 (Session 2) — Populous-Inspired Spacing Overhaul
+
+### Global CSS (`src/app/globals.css`)
+- Added fluid spacing system via CSS custom properties: `--fluid-section`, `--fluid-hero`, `--fluid-container`, `--fluid-gap`, `--fluid-header-mb`
+- Replaced static breakpoint-based padding with `clamp()` values — `.section` now `clamp(4rem, 8vw, 8rem)`, `.hero-section` `clamp(5rem, 10vw, 10rem)`, `.section-container` `clamp(1.25rem, 3vw, 2.5rem)`
+- Tightened heading typography: `.section-title` line-height `1.05` (was `1.15`), letter-spacing `-0.03em` (was `-0.01em`), fluid font-size `clamp(1.875rem, 4vw, 3.25rem)`
+- `.bento-grid` gap now uses `clamp(1rem, 2vw, 1.5rem)` instead of fixed `1rem`
+
+### Home Page (`src/app/page.tsx`)
+- Hero vertical padding: `py-[clamp(6rem,14vw,14rem)]` (was `py-32 md:py-48`)
+- Stats bar bottom padding: `pb-[clamp(3rem,6vw,6rem)]`
+- Stats grid gap: `gap-[clamp(1rem,2vw,1.5rem)]` (was `gap-5`)
+- Divider margin: `mb-[clamp(2rem,4vw,4rem)]` (was `mb-12`)
+- CTA section padding: `py-[clamp(5rem,10vw,10rem)]` (was `py-24`)
+- Heading line-height tightened to `1.02` on hero, `1.05` on CTA
+
+### All Pages — Standardized Spacing
+- **About**: team grid `gap-[clamp(1rem,2vw,1.5rem)]` (was `gap-6`), approach grid `gap-[clamp(1.5rem,3vw,3rem)]` (was `gap-8`), CTA `py-[clamp(4rem,8vw,8rem)]` (was `py-20`), h1 `leading-[1.05]`
+- **Services**: grid `gap-[clamp(1rem,2vw,1.5rem)]` (was `gap-6`), CTA `py-[clamp(4rem,8vw,8rem)]`, h1 `leading-[1.05]`
+- **Portfolio**: grid `gap-[clamp(1rem,2vw,1.5rem)]` (was `gap-6`), h1 `leading-[1.05]`
+- **Contact**: grid `gap-[clamp(1.5rem,3vw,3rem)]` (was `gap-10`), h1 `leading-[1.05]`
+- **Track**: hero h1 `leading-[1.05]`
+- **Track [id]**: detail sections `py-[clamp(3rem,6vw,6rem)]` (was `py-20 md:py-28`)
+- **Service [id]**: h1 `leading-[1.05]`, CTA `py-[clamp(4rem,8vw,8rem)]`
+- **Footer**: padding `py-[clamp(3rem,5vw,5rem)]` (was `py-16`), grid `gap-[clamp(1.5rem,3vw,3rem)]` (was `gap-10`)
+
+### Navbar (`src/components/Navbar.tsx`)
+- Burger button gets `hidden` class when mobile drawer is open — prevents overlapping close icons (hamburger X animation + drawer's close button were both visible)
+
+## 2026-06-30 (Session 1) — Layout Modernization & Review System
 
 ### Global CSS (`src/app/globals.css`)
 - Added `border-radius: 0.5rem` to `.btn-primary`, `.btn-secondary`, `.btn-outline`, `.btn-ghost` — standalone buttons were sharp squares
