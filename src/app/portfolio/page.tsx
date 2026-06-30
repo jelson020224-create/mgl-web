@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma'
+import { getSiteSettings } from '@/lib/queries'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
 
 async function getPortfolio() {
@@ -8,7 +9,7 @@ async function getPortfolio() {
 }
 
 export default async function PortfolioPage() {
-  const { items, categories } = await getPortfolio()
+  const [{ items, categories }, settings] = await Promise.all([getPortfolio(), getSiteSettings()])
 
   return (
     <>
@@ -19,11 +20,11 @@ export default async function PortfolioPage() {
         <div className="noise-overlay absolute inset-0" />
         <div className="section-container relative text-center">
           <AnimateOnScroll type="fade-up">
-            <span className="section-eyebrow text-terracotta/80">Our Work</span>
+            <span className="section-eyebrow text-terracotta/80">{settings.portfolio_hero_eyebrow || 'Our Work'}</span>
             <h1 className="text-4xl md:text-6xl font-bold font-serif leading-[1.05] mb-5">
-              Our <span className="gradient-text">Portfolio</span>
+              {settings.portfolio_hero_title || (<>Our <span className="gradient-text">Portfolio</span></>)}
             </h1>
-            <p className="text-lg text-gray-light/60 font-light">A showcase of our finest work</p>
+            <p className="text-lg text-gray-light/60 font-light">{settings.portfolio_hero_subtitle || 'A showcase of our finest work'}</p>
           </AnimateOnScroll>
         </div>
       </section>

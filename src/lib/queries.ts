@@ -33,6 +33,22 @@ export async function getAllTestimonials() {
   }
 }
 
+export async function getTeamMembers() {
+  try {
+    return await prisma.teamMember.findMany({ orderBy: { order: 'asc' } })
+  } catch {
+    return []
+  }
+}
+
+export async function getApproachSteps() {
+  try {
+    return await prisma.approachStep.findMany({ orderBy: { order: 'asc' } })
+  } catch {
+    return []
+  }
+}
+
 export async function getPortfolioItems() {
   try {
     return await prisma.portfolioItem.findMany({ orderBy: { createdAt: 'desc' } })

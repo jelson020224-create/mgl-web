@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma'
 import Link from 'next/link'
+import { getSiteSettings } from '@/lib/queries'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
 
 async function getServices() {
@@ -10,7 +11,7 @@ async function getServices() {
 }
 
 export default async function ServicesPage() {
-  const services = await getServices()
+  const [services, settings] = await Promise.all([getServices(), getSiteSettings()])
 
   return (
     <>
@@ -21,10 +22,10 @@ export default async function ServicesPage() {
         <div className="noise-overlay absolute inset-0" />
         <div className="section-container relative text-center">
           <AnimateOnScroll type="fade-up">
-            <span className="section-eyebrow text-terracotta/80">Our Expertise</span>
-            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-[1.05] mb-5">Our <span className="gradient-text">Services</span></h1>
+            <span className="section-eyebrow text-terracotta/80">{settings.services_hero_eyebrow || 'Our Expertise'}</span>
+            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-[1.05] mb-5">{settings.services_hero_title || (<>Our <span className="gradient-text">Services</span></>)}</h1>
             <p className="text-lg text-gray-light/60 max-w-2xl mx-auto font-light">
-              Everything you need under one roof — from concept to completion.
+              {settings.services_hero_subtitle || 'Everything you need under one roof — from concept to completion.'}
             </p>
           </AnimateOnScroll>
         </div>

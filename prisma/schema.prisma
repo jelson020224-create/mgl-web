@@ -96,6 +96,21 @@ model ProjectUpdate {
   @@index([projectId])
 }
 
+model TeamMember {
+  id          Int    @id @default(autoincrement())
+  title       String @default("")
+  description String @default("")
+  icon        String @default("")
+  order       Int    @default(0)
+}
+
+model ApproachStep {
+  id    Int    @id @default(autoincrement())
+  step  String @default("")
+  title String @default("")
+  order Int    @default(0)
+}
+
 model ContactMessage {
   id        Int      @id @default(autoincrement())
   name      String

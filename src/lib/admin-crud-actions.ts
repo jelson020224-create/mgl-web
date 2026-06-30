@@ -153,3 +153,60 @@ export async function deleteMessage(id: number) {
     return { error: 'Failed to delete message.', success: '' }
   }
 }
+
+export async function saveTeamMember(prevState: { error: string; success: string }, formData: FormData) {
+  try {
+    const id = formData.get('id') as string
+    const title = formData.get('title') as string
+    const description = formData.get('description') as string
+    const icon = formData.get('icon') as string
+    const order = parseInt(formData.get('order') as string) || 0
+    if (!title) return { error: 'Title is required.', success: '' }
+    if (id) {
+      await prisma.teamMember.update({ where: { id: Number(id) }, data: { title, description, icon, order } })
+    } else {
+      await prisma.teamMember.create({ data: { title, description, icon, order } })
+    }
+    revalidatePath('/admin/team')
+    return { error: '', success: 'Team member saved.' }
+  } catch {
+    return { error: 'Failed to save team member.', success: '' }
+  }
+}
+
+export async function deleteTeamMember(id: number) {
+  try {
+    await prisma.teamMember.delete({ where: { id } })
+    revalidatePath('/admin/team')
+  } catch {
+    return { error: 'Failed to delete team member.', success: '' }
+  }
+}
+
+export async function saveApproachStep(prevState: { error: string; success: string }, formData: FormData) {
+  try {
+    const id = formData.get('id') as string
+    const step = formData.get('step') as string
+    const title = formData.get('title') as string
+    const order = parseInt(formData.get('order') as string) || 0
+    if (!step || !title) return { error: 'Step and title are required.', success: '' }
+    if (id) {
+      await prisma.approachStep.update({ where: { id: Number(id) }, data: { step, title, order } })
+    } else {
+      await prisma.approachStep.create({ data: { step, title, order } })
+    }
+    revalidatePath('/admin/approach')
+    return { error: '', success: 'Approach step saved.' }
+  } catch {
+    return { error: 'Failed to save approach step.', success: '' }
+  }
+}
+
+export async function deleteApproachStep(id: number) {
+  try {
+    await prisma.approachStep.delete({ where: { id } })
+    revalidatePath('/admin/approach')
+  } catch {
+    return { error: 'Failed to delete approach step.', success: '' }
+  }
+}

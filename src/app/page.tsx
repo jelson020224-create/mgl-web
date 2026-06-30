@@ -45,12 +45,16 @@ export default async function HomePage() {
               <AnimateOnScroll type="fade-up">
                 <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-terracotta/80 mb-5 bg-terracotta/10 px-4 py-1.5 rounded-full">
                   <span className="w-1.5 h-1.5 rounded-full bg-terracotta animate-pulse-soft" />
-                  MGL Construction & Interior
+                  {settings.hero_eyebrow || 'MGL Construction & Interior'}
                 </span>
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.02] mb-6 font-serif tracking-tight">
-                  Building Your{' '}
-                  <span className="gradient-text">Vision</span>
-                  <br />From the Ground Up
+                  {settings.hero_title || (
+                    <>
+                      Building Your{' '}
+                      <span className="gradient-text">Vision</span>
+                      <br />From the Ground Up
+                    </>
+                  )}
                 </h1>
               </AnimateOnScroll>
               <AnimateOnScroll type="fade-up" delay={200}>
@@ -61,13 +65,13 @@ export default async function HomePage() {
               <AnimateOnScroll type="fade-up" delay={400}>
                 <div className="flex flex-wrap gap-4">
                   <Link href="/contact" className="btn btn-primary btn-lg group">
-                    Get a Free Quote
+                    {settings.hero_cta_text || 'Get a Free Quote'}
                     <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </Link>
                   <Link href="/portfolio" className="btn btn-lg text-white/70 hover:text-white border border-white/15 hover:border-white/30 rounded-xl px-7 py-3 font-semibold transition-all backdrop-blur-sm bg-white/[0.03]">
-                    View Portfolio
+                    {settings.hero_secondary_cta_text || 'View Portfolio'}
                   </Link>
                 </div>
               </AnimateOnScroll>
@@ -79,10 +83,10 @@ export default async function HomePage() {
               <span className="divider-dash-dot" />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(1rem,2vw,1.5rem)]">
-              <StatCard num={(settings.stats_projects || '150') + '+'} label="Projects Completed" delay={600} />
-              <StatCard num={(settings.stats_years || '12') + '+'} label="Years Experience" delay={700} />
-              <StatCard num={(settings.stats_clients || '50') + '+'} label="Happy Clients" delay={800} />
-              <StatCard num={(settings.stats_team || '20') + '+'} label="Expert Team" delay={900} />
+              <StatCard num={(settings.stats_projects || '150') + '+'} label={(settings.stats_label_projects || 'Projects Completed')} delay={600} />
+              <StatCard num={(settings.stats_years || '12') + '+'} label={(settings.stats_label_years || 'Years Experience')} delay={700} />
+              <StatCard num={(settings.stats_clients || '50') + '+'} label={(settings.stats_label_clients || 'Happy Clients')} delay={800} />
+              <StatCard num={(settings.stats_team || '20') + '+'} label={(settings.stats_label_team || 'Expert Team')} delay={900} />
             </div>
           </div>
         </div>
@@ -94,12 +98,12 @@ export default async function HomePage() {
         <div className="section-container relative">
           <AnimateOnScroll type="fade-up">
             <div className="section-header">
-              <span className="section-eyebrow">What We Do</span>
-              <h2 className="section-title">Our Services</h2>
+              <span className="section-eyebrow">{settings.services_eyebrow || 'What We Do'}</span>
+              <h2 className="section-title">{settings.services_title || 'Our Services'}</h2>
               <div className="divider-dash justify-center mb-4">
                 <span className="divider-dash-dot" />
               </div>
-              <p className="section-subtitle">Comprehensive solutions for every stage of your project</p>
+              <p className="section-subtitle">{settings.services_subtitle || 'Comprehensive solutions for every stage of your project'}</p>
             </div>
           </AnimateOnScroll>
           <div className="bento-grid">
@@ -142,12 +146,12 @@ export default async function HomePage() {
           <div className="section-container relative">
             <AnimateOnScroll type="fade-up">
               <div className="section-header">
-                <span className="section-eyebrow">Testimonials</span>
-                <h2 className="section-title">What Our Clients Say</h2>
+                <span className="section-eyebrow">{settings.testimonials_eyebrow || 'Testimonials'}</span>
+                <h2 className="section-title">{settings.testimonials_title || 'What Our Clients Say'}</h2>
                 <div className="divider-dash justify-center mb-4">
                   <span className="divider-dash-dot" />
                 </div>
-                <p className="section-subtitle">Trusted by homeowners and businesses alike</p>
+                <p className="section-subtitle">{settings.testimonials_subtitle || 'Trusted by homeowners and businesses alike'}</p>
               </div>
             </AnimateOnScroll>
             <div className="bento-grid">
@@ -182,12 +186,12 @@ export default async function HomePage() {
         <div className="section-container relative">
           <AnimateOnScroll type="fade-up">
             <div className="section-header">
-              <span className="section-eyebrow">Portfolio</span>
-              <h2 className="section-title">Recent Projects</h2>
+              <span className="section-eyebrow">{settings.portfolio_eyebrow || 'Portfolio'}</span>
+              <h2 className="section-title">{settings.portfolio_title || 'Recent Projects'}</h2>
               <div className="divider-dash justify-center mb-4">
                 <span className="divider-dash-dot" />
               </div>
-              <p className="section-subtitle">A glimpse of our work — each project tells a story</p>
+              <p className="section-subtitle">{settings.portfolio_subtitle || 'A glimpse of our work \u2014 each project tells a story'}</p>
             </div>
           </AnimateOnScroll>
           {portfolio.length > 0 ? (
@@ -238,16 +242,16 @@ export default async function HomePage() {
           <div className="max-w-2xl mx-auto">
             <AnimateOnScroll type="scale-in">
               <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-terracotta/70 mb-5 bg-terracotta/10 px-4 py-1.5 rounded-full">
-                Let&apos;s Build Together
+                {settings.cta_eyebrow || "Let's Build Together"}
               </span>
               <h2 className="text-4xl md:text-5xl font-bold mb-5 font-serif leading-[1.05]">
-                Ready to Start<br />Your <span className="gradient-text">Project</span>?
+                {settings.cta_title || (<>Ready to Start<br />Your <span className="gradient-text">Project</span>?</>)}
               </h2>
               <p className="text-gray-light/60 mb-10 text-lg max-w-lg mx-auto font-light">
-                Whether you need a full construction, interior design, or renovation — we bring your vision to life.
+                {settings.cta_subtitle || 'Whether you need a full construction, interior design, or renovation \u2014 we bring your vision to life.'}
               </p>
               <Link href="/contact" className="btn btn-primary btn-lg group">
-                Get in Touch
+                {settings.cta_button || 'Get in Touch'}
                 <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

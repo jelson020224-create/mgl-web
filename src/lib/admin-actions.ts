@@ -64,10 +64,24 @@ export async function getSettings() {
 
 export async function saveSettings(prevState: { error: string; success: string }, formData: FormData) {
   try {
-    const keys = ['company_name', 'company_email', 'company_phone', 'company_address',
-      'hero_title', 'hero_subtitle', 'about_content',
+    const keys = [
+      'company_name', 'company_email', 'company_phone', 'company_address',
+      'hero_eyebrow', 'hero_title', 'hero_subtitle', 'hero_cta_text', 'hero_secondary_cta_text',
+      'stats_label_projects', 'stats_label_years', 'stats_label_clients', 'stats_label_team',
       'stats_projects', 'stats_years', 'stats_clients', 'stats_team',
-      'logo_url']
+      'services_eyebrow', 'services_title', 'services_subtitle',
+      'testimonials_eyebrow', 'testimonials_title', 'testimonials_subtitle',
+      'portfolio_eyebrow', 'portfolio_title', 'portfolio_subtitle',
+      'cta_eyebrow', 'cta_title', 'cta_subtitle', 'cta_button',
+      'about_hero_eyebrow', 'about_hero_title',
+      'services_hero_eyebrow', 'services_hero_title', 'services_hero_subtitle',
+      'portfolio_hero_eyebrow', 'portfolio_hero_title', 'portfolio_hero_subtitle',
+      'contact_hero_eyebrow', 'contact_hero_title', 'contact_hero_subtitle',
+      'track_hero_title', 'track_hero_subtitle',
+      'footer_description', 'footer_company_name',
+      'about_content',
+      'logo_url'
+    ]
 
     for (const key of keys) {
       const value = formData.get(key) as string

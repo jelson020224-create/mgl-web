@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma'
+import { getSiteSettings } from '@/lib/queries'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
 
 async function searchProjects(search: string) {
@@ -16,18 +17,18 @@ export default async function TrackPage({
   searchParams: Promise<{ q?: string }>
 }) {
   const { q } = await searchParams
-  const results = q ? await searchProjects(q) : []
+  const [results, settings] = await Promise.all([q ? searchProjects(q) : [], getSiteSettings()])
 
   return (
     <>
       <section className="bg-warm-gray text-white hero-section">
         <div className="section-container text-center">
           <AnimateOnScroll type="fade-up">
-            <h1 className="text-5xl font-bold mb-6 leading-[1.05]">Track Your <span className="text-terracotta">Project</span></h1>
+            <h1 className="text-5xl font-bold mb-6 leading-[1.05]">{settings.track_hero_title || (<>Track Your <span className="text-terracotta">Project</span></>)}</h1>
           </AnimateOnScroll>
           <AnimateOnScroll type="fade-up" delay={200}>
             <p className="text-lg text-gray-light/80 mb-8">
-              Enter your name to find your project and view the latest updates.
+              {settings.track_hero_subtitle || 'Enter your name to find your project and view the latest updates.'}
             </p>
           </AnimateOnScroll>
           <AnimateOnScroll type="fade-up" delay={300}>

@@ -18,7 +18,7 @@ export default function Footer({ settings }: FooterProps) {
               <SiteLogo settings={settings} variant="full" className="h-10" />
             </Link>
             <p className="text-sm text-gray/60 leading-relaxed pr-6">
-              Building dreams with precision and passion. From concept to completion, we deliver excellence in every project.
+              {settings.footer_description || 'Building dreams with precision and passion. From concept to completion, we deliver excellence in every project.'}
             </p>
           </div>
 
@@ -92,7 +92,7 @@ export default function Footer({ settings }: FooterProps) {
 
       <div className="border-t border-white/5">
         <div className="section-container py-6 md:py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray/40">&copy; {new Date().getFullYear()} {settings.company_name || 'MGL Construction'}. All rights reserved.</p>
+          <p className="text-sm text-gray/40">&copy; {new Date().getFullYear()} {settings.footer_company_name || settings.company_name || 'MGL Construction'}. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/services" className="text-xs text-gray/40 hover:text-white/60 transition-colors">Services</Link>
             <span className="w-1 h-1 rounded-full bg-terracotta/50" />
