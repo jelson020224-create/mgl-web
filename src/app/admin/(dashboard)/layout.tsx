@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/session'
+import { BrandMark } from '@/components/brand-mark'
 
 const navItems = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
@@ -21,12 +22,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <div className="min-h-screen bg-warm-gray-50 flex">
       <aside className="w-64 bg-warm-gray text-white shrink-0 hidden md:flex flex-col">
         <div className="px-5 py-6 border-b border-white/5">
-          <Link href="/admin/dashboard" className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-terracotta flex items-center justify-center text-white text-sm font-bold">M</div>
-            <div>
-              <h2 className="text-sm font-bold leading-tight">MGL Admin</h2>
-              <p className="text-[10px] text-gray/50 uppercase tracking-wider mt-0.5">Dashboard</p>
-            </div>
+          <Link href="/admin/dashboard" className="inline-block">
+            <BrandMark size={28} variant="admin" />
           </Link>
         </div>
         <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
@@ -34,24 +31,24 @@ export default async function DashboardLayout({ children }: { children: React.Re
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-light/70 hover:text-white hover:bg-white/5 transition-all"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-light/60 hover:text-white hover:bg-white/[0.06] transition-all"
             >
-              <svg className="w-4 h-4 shrink-0 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <svg className="w-4 h-4 shrink-0 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
               </svg>
               {item.label}
             </Link>
           ))}
         </nav>
-        <div className="p-3 border-t border-white/5 space-y-1">
-          <Link href="/" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-light/60 hover:text-white hover:bg-white/5 transition-all">
+        <div className="p-3 border-t border-white/5 space-y-0.5">
+          <Link href="/" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-light/50 hover:text-white hover:bg-white/[0.06] transition-all">
             <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             View Site
           </Link>
           <form action="/api/admin/logout" method="POST">
-            <button type="submit" className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm text-gray-light/60 hover:text-red-400 hover:bg-white/5 transition-all">
+            <button type="submit" className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm text-gray-light/50 hover:text-red-400 hover:bg-white/[0.06] transition-all">
               <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
               </svg>
@@ -62,11 +59,14 @@ export default async function DashboardLayout({ children }: { children: React.Re
       </aside>
       <div className="flex-1 flex flex-col min-w-0">
         <header className="bg-white border-b border-sand-light px-6 py-3 flex md:hidden items-center justify-between">
-          <Link href="/admin/dashboard" className="font-bold text-sm text-terracotta">MGL Admin</Link>
+          <Link href="/admin/dashboard" className="flex items-center gap-2">
+            <BrandMark size={24} variant="admin" />
+            <span className="text-xs font-bold text-terracotta tracking-tight">Admin</span>
+          </Link>
           <div className="flex items-center gap-3 text-xs">
-            <Link href="/" className="text-gray hover:text-black transition-colors">Site</Link>
+            <Link href="/" className="text-gray-dark hover:text-warm-gray transition-colors">Site</Link>
             <form action="/api/admin/logout" method="POST">
-              <button type="submit" className="text-gray hover:text-red-500 transition-colors">Logout</button>
+              <button type="submit" className="text-gray-dark hover:text-red-500 transition-colors">Logout</button>
             </form>
           </div>
         </header>

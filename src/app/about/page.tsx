@@ -15,35 +15,45 @@ export default async function AboutPage() {
 
   return (
     <>
-      <section className="bg-warm-gray text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative bg-warm-gray text-white overflow-hidden py-24">
+        <div className="absolute inset-0 bg-gradient-to-br from-warm-gray via-warm-gray-soft to-[#222]" />
+        <div className="absolute inset-0 opacity-[0.03] pattern-grid" />
+        <div className="absolute top-1/4 -right-32 w-80 h-80 bg-terracotta/8 rounded-full blur-[100px]" />
+        <div className="noise-overlay absolute inset-0" />
+        <div className="section-container relative text-center">
           <AnimateOnScroll type="fade-up">
-            <h1 className="text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-playfair), serif' }}>
-              About <span className="text-terracotta">MGL</span>
+            <span className="section-eyebrow text-terracotta/80">Who We Are</span>
+            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-6">
+              About <span className="gradient-text">MGL</span>
             </h1>
-          </AnimateOnScroll>
-          <AnimateOnScroll type="fade-up" delay={200}>
-            <div className="text-lg text-gray-light/80 max-w-3xl mx-auto leading-relaxed prose prose-invert"
+            <div className="text-lg text-gray-light/70 max-w-3xl mx-auto leading-relaxed font-light"
               dangerouslySetInnerHTML={{ __html: settings.about_content || '<p>We are a full-service construction and interior design firm built on craftsmanship, creativity, and collaboration.</p>' }} />
           </AnimateOnScroll>
         </div>
       </section>
 
-      <section className="py-20 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section bg-mesh relative">
+        <div className="section-container relative">
           <AnimateOnScroll type="fade-up">
-            <div className="text-center mb-16">
-              <h2 className="section-title" style={{ fontFamily: 'var(--font-playfair), serif' }}>Our Team</h2>
+            <div className="section-header">
+              <span className="section-eyebrow">Our People</span>
+              <h2 className="section-title">The Team</h2>
+              <div className="divider-dash justify-center mb-4">
+                <span className="divider-dash-dot" />
+              </div>
               <p className="section-subtitle">Experts in every discipline, working as one</p>
             </div>
           </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {team.map((m, i) => (
-              <AnimateOnScroll key={m.role} type="fade-up" delay={i * 100}>
-                <div className="card card-shine p-8 text-center group">
-                  <div className="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110">{m.icon}</div>
-                  <h3 className="text-xl font-bold text-warm-gray mb-3">{m.role}</h3>
-                  <p className="text-gray text-sm leading-relaxed">{m.desc}</p>
+              <AnimateOnScroll key={m.role} type="fade-up" delay={i * 80}>
+                <div className="card card-shine p-8 text-center group h-full relative overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-terracotta to-terracotta-light scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  <div className="w-16 h-16 rounded-2xl bg-terracotta-50 flex items-center justify-center mx-auto mb-5 text-3xl group-hover:bg-terracotta group-hover:text-white transition-all duration-300">
+                    {m.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-warm-gray mb-3">{m.role}</h3>
+                  <p className="text-sm text-gray-dark leading-relaxed">{m.desc}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -51,25 +61,58 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="section bg-white relative">
+        <div className="absolute inset-0 pattern-dots opacity-[0.12]" />
+        <div className="section-container relative">
           <AnimateOnScroll type="fade-up">
-            <h2 className="section-title" style={{ fontFamily: 'var(--font-playfair), serif' }}>Our Approach</h2>
+            <div className="section-header">
+              <span className="section-eyebrow">How We Work</span>
+              <h2 className="section-title">Our Approach</h2>
+              <div className="divider-dash justify-center mb-4">
+                <span className="divider-dash-dot" />
+              </div>
+              <p className="section-subtitle">A streamlined process from idea to completion</p>
+            </div>
           </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-4">
             {[
               { step: '01', title: 'Consult' },
               { step: '02', title: 'Design' },
               { step: '03', title: 'Approve' },
               { step: '04', title: 'Build' },
             ].map((s, i) => (
-              <AnimateOnScroll key={s.step} type="fade-up" delay={i * 150}>
-                <div className="group">
-                  <div className="text-4xl font-bold text-terracotta/30 mb-2 transition-all duration-300 group-hover:text-terracotta group-hover:scale-110">{s.step}</div>
-                  <div className="text-xl font-semibold text-warm-gray">{s.title}</div>
+              <AnimateOnScroll key={s.step} type="fade-up" delay={i * 100}>
+                <div className="text-center group">
+                  <div className="w-16 h-16 rounded-2xl bg-terracotta-50 flex items-center justify-center mx-auto mb-4 group-hover:bg-terracotta group-hover:text-white transition-all duration-300">
+                    <span className="text-lg font-bold font-serif">{s.step}</span>
+                  </div>
+                  <div className="text-lg font-bold text-warm-gray">{s.title}</div>
+                  <div className="w-8 h-0.5 bg-terracotta/30 mx-auto mt-3 group-hover:w-12 transition-all duration-300" />
                 </div>
               </AnimateOnScroll>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative bg-warm-gray text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03] pattern-dots" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-terracotta/5 rounded-full blur-[120px]" />
+        <div className="section py-20 text-center relative">
+          <div className="max-w-xl mx-auto">
+            <AnimateOnScroll type="scale-in">
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-terracotta/70 mb-5 bg-terracotta/10 px-4 py-1.5 rounded-full">
+                Get Started
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">Ready to Work With Us?</h2>
+              <p className="text-gray-light/60 mb-8">Let&apos;s discuss your vision and make it a reality.</p>
+              <a href="/contact" className="btn btn-primary btn-lg group">
+                Contact Us
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </AnimateOnScroll>
           </div>
         </div>
       </section>

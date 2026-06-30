@@ -12,52 +12,68 @@ export default async function PortfolioPage() {
 
   return (
     <>
-      <section className="bg-warm-gray text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative bg-warm-gray text-white overflow-hidden py-24">
+        <div className="absolute inset-0 bg-gradient-to-br from-warm-gray via-warm-gray-soft to-[#222]" />
+        <div className="absolute inset-0 opacity-[0.03] pattern-grid" />
+        <div className="absolute bottom-1/3 -right-32 w-80 h-80 bg-terracotta/8 rounded-full blur-[100px]" />
+        <div className="noise-overlay absolute inset-0" />
+        <div className="section-container relative text-center">
           <AnimateOnScroll type="fade-up">
-            <h1 className="text-5xl font-bold mb-6">Our <span className="text-terracotta">Portfolio</span></h1>
-          </AnimateOnScroll>
-          <AnimateOnScroll type="fade-up" delay={200}>
-            <p className="text-lg text-gray-light/80">A showcase of our finest work</p>
+            <span className="section-eyebrow text-terracotta/80">Our Work</span>
+            <h1 className="text-4xl md:text-6xl font-bold font-serif leading-tight mb-5">
+              Our <span className="gradient-text">Portfolio</span>
+            </h1>
+            <p className="text-lg text-gray-light/60 font-light">A showcase of our finest work</p>
           </AnimateOnScroll>
         </div>
       </section>
 
-      <section className="py-20 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section bg-mesh relative">
+        <div className="section-container relative">
           {categories.length > 0 && (
             <AnimateOnScroll type="fade-up">
               <div className="flex flex-wrap gap-3 justify-center mb-12">
                 {categories.map((cat) => (
-                  <span key={cat} className="px-4 py-2 bg-white text-warm-gray text-sm font-semibold rounded-full border border-gray/20 transition-all duration-300 hover:bg-terracotta hover:text-white hover:border-terracotta cursor-default">
-                    {cat}
-                  </span>
+                  <span key={cat} className="badge badge-terracotta text-xs px-4 py-1.5 cursor-default">{cat}</span>
                 ))}
               </div>
             </AnimateOnScroll>
           )}
 
           {items.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {items.map((p, i) => (
-                <AnimateOnScroll key={p.id} type="scale-in" delay={i * 100}>
-                  <div className="card group">
-                    <div className="aspect-[4/3] image-placeholder flex items-center justify-center text-gray overflow-hidden">
-                      <svg className="w-12 h-12 transition-transform duration-500 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                <AnimateOnScroll key={p.id} type="scale-in" delay={i * 80}>
+                  <div className="card group overflow-hidden">
+                    <div className="aspect-[4/3] overflow-hidden bg-gray-light">
+                      {p.imageUrl && p.imageUrl !== '/placeholder.jpg' ? (
+                        <img src={p.imageUrl} alt={p.title} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:rotate-[0.5deg]" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <svg className="w-12 h-12 text-gray/30" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+                          </svg>
+                        </div>
+                      )}
                     </div>
-                    <div className="p-5">
-                      <span className="text-xs font-semibold text-terracotta uppercase tracking-wider">{p.category}</span>
-                      <h3 className="text-lg font-bold text-warm-gray mt-1">{p.title}</h3>
-                      <p className="text-gray text-sm mt-2">{p.description}</p>
+                    <div className="p-5 relative">
+                      <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-terracotta/30 to-transparent" />
+                      <span className="badge badge-terracotta text-[10px] uppercase tracking-widest font-semibold">{p.category}</span>
+                      <h3 className="text-base font-bold text-warm-gray mt-2.5 mb-1">{p.title}</h3>
+                      {p.description && <p className="text-xs text-gray-dark leading-relaxed">{p.description}</p>}
                     </div>
                   </div>
                 </AnimateOnScroll>
               ))}
             </div>
           ) : (
-            <div className="text-center py-20 text-gray">
-              <p className="text-xl mb-4 animate-pulse-soft">Portfolio coming soon</p>
-              <p className="text-sm">We are currently updating our gallery with our latest projects.</p>
+            <div className="card p-16 text-center">
+              <div className="w-16 h-16 rounded-2xl bg-terracotta-50 flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-terracotta/60" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+                </svg>
+              </div>
+              <p className="text-gray text-sm">Portfolio coming soon. Check back for updates.</p>
             </div>
           )}
         </div>

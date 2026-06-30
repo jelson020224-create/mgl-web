@@ -2,6 +2,7 @@
 
 import { useActionState } from 'react'
 import { adminLogin } from './actions'
+import { BrandMark } from '@/components/brand-mark'
 
 const initialState = { error: '' }
 
@@ -9,14 +10,19 @@ export default function AdminLoginPage() {
   const [state, formAction, pending] = useActionState(adminLogin, initialState)
 
   return (
-    <div className="min-h-screen bg-warm-gray flex items-center justify-center px-4">
-      <div className="w-full max-w-sm">
+    <div className="min-h-screen bg-warm-gray flex items-center justify-center px-4 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.03] pattern-grid" />
+      <div className="absolute top-1/3 -left-32 w-80 h-80 bg-terracotta/8 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/3 -right-32 w-80 h-80 bg-terracotta/5 rounded-full blur-[100px]" />
+      <div className="w-full max-w-sm relative">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-xl bg-terracotta flex items-center justify-center text-white font-bold text-lg mx-auto mb-4">M</div>
+          <div className="flex justify-center mb-5">
+            <BrandMark size={48} variant="admin" />
+          </div>
           <h1 className="text-2xl font-bold text-white">Admin Login</h1>
-          <p className="text-sm text-gray/60 mt-1">MGL Construction & Interior</p>
+          <p className="text-sm text-gray/50 mt-1">MGL Construction & Interior</p>
         </div>
-        <div className="bg-white rounded-xl p-6">
+        <div className="bg-white rounded-2xl p-7 shadow-2xl">
           <form action={formAction} className="space-y-4">
             <div className="input-group">
               <label className="input-label" htmlFor="email">Email</label>
