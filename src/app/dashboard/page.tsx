@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma'
 import { getClientSession } from '@/lib/client-session'
 import Link from 'next/link'
+import AccountDanger from './account-danger'
 
 export default async function DashboardPage() {
   const session = await getClientSession()
@@ -71,6 +72,8 @@ export default async function DashboardPage() {
           ))}
         </div>
       )}
+
+      <AccountDanger />
     </div>
   )
 }
