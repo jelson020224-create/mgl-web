@@ -13,6 +13,10 @@ export async function getTestimonials() {
   return prisma.testimonial.findMany({ where: { active: true }, orderBy: { createdAt: 'desc' } })
 }
 
+export async function getAllTestimonials() {
+  return prisma.testimonial.findMany({ orderBy: { createdAt: 'desc' } })
+}
+
 export async function getPortfolioItems() {
   return prisma.portfolioItem.findMany({ orderBy: { createdAt: 'desc' } })
 }

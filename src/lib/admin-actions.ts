@@ -27,6 +27,11 @@ export async function saveTestimonial(prevState: { error: string; success: strin
   return { error: '', success: 'Testimonial saved.' }
 }
 
+export async function approveTestimonial(id: number) {
+  await prisma.testimonial.update({ where: { id }, data: { active: true } })
+  revalidatePath('/admin/testimonials')
+}
+
 export async function deleteTestimonial(id: number) {
   await prisma.testimonial.delete({ where: { id } })
   revalidatePath('/admin/testimonials')
