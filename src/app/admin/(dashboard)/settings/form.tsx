@@ -80,6 +80,20 @@ export default function SettingsForm({ settings }: { settings: Record<string, st
         </fieldset>
 
         <fieldset className="border border-gray/20 rounded-lg p-6">
+          <legend className="text-sm font-semibold text-warm-gray px-2">Brand Text (beside logo)</legend>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-warm-gray mb-1">Primary (e.g. MGL)</label>
+              <input name="brand_primary" defaultValue={settings.brand_primary || 'MGL'} className="w-full px-4 py-3 rounded-lg border border-gray/20 focus:outline-none focus:ring-2 focus:ring-orange" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-warm-gray mb-1">Secondary (e.g. Construction & Interior)</label>
+              <input name="brand_secondary_text" defaultValue={settings.brand_secondary_text || 'Construction & Interior'} className="w-full px-4 py-3 rounded-lg border border-gray/20 focus:outline-none focus:ring-2 focus:ring-orange" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset className="border border-gray/20 rounded-lg p-6">
           <legend className="text-sm font-semibold text-warm-gray px-2">Hero Section</legend>
           <div className="space-y-4">
             <div>

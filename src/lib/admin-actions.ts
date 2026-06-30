@@ -80,7 +80,8 @@ export async function saveSettings(prevState: { error: string; success: string }
       'track_hero_title', 'track_hero_subtitle',
       'footer_description', 'footer_company_name',
       'about_content',
-      'logo_url'
+      'logo_url',
+      'brand_primary', 'brand_secondary_text'
     ]
 
     for (const key of keys) {

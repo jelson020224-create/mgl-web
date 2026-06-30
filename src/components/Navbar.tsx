@@ -55,8 +55,8 @@ export default function Navbar({ settings }: NavbarProps) {
               <SiteLogo settings={settings} variant="full" className="h-10" />
             </div>
             <div className="leading-tight hidden sm:block">
-              <span className="block text-sm font-bold tracking-tight text-white">MGL</span>
-              <span className="block text-[9px] tracking-[0.15em] uppercase text-gray-light/60 leading-snug">Construction<br />&amp; Interior</span>
+              <span className="block text-sm font-bold tracking-tight text-white">{settings.brand_primary || 'MGL'}</span>
+              <span className="block text-[9px] tracking-[0.15em] uppercase text-gray-light/60 leading-snug">{settings.brand_secondary_text || 'Construction & Interior'}</span>
             </div>
           </Link>
 
