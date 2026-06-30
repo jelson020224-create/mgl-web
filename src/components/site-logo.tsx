@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useState } from 'react'
 import { BrandMark, MLogo } from './brand-mark'
 
@@ -24,11 +23,9 @@ export function SiteLogo({ settings, src, variant = 'full', size = 32, className
 
   if (variant === 'full') {
     return (
-      <Image
+      <img
         src={logoUrl}
         alt="MGL Logo"
-        width={150}
-        height={45}
         className={`h-10 w-auto object-contain ${className}`}
         onError={() => setErrored(true)}
       />
@@ -36,7 +33,7 @@ export function SiteLogo({ settings, src, variant = 'full', size = 32, className
   }
 
   return (
-    <Image
+    <img
       src={logoUrl}
       alt="MGL"
       width={size}
