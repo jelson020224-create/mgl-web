@@ -2,7 +2,10 @@
 
 import prisma from '@/lib/prisma'
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 import { rateLimit } from '@/lib/rate-limit'
+import { createEmailOtpCookie, generateOtpCode } from '@/lib/email-otp'
+import { sendVerificationEmail } from '@/lib/email-sender'
 
 export async function registerClient(prevState: { error: string }, formData: FormData) {
   try {
@@ -25,11 +28,23 @@ export async function registerClient(prevState: { error: string }, formData: For
     if (existing) return { error: 'An account with this email already exists.' }
 
     const bcrypt = await import('bcryptjs')
-    const hashed = await bcrypt.hash(password, 10)
+    const hashedPassword = await bcrypt.hash(password, 10)
 
-    await prisma.client.create({ data: { name, email, password: hashed } })
+    const code = generateOtpCode()
+    const cookie = await createEmailOtpCookie(name, email, hashedPassword, code)
 
-    redirect('/login?registered=1')
+    const cookieStore = await cookies()
+    cookieStore.set('email_verify', cookie, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 600,
+      sameSite: 'lax',
+      path: '/',
+    })
+
+    await sendVerificationEmail(email, code)
+
+    redirect(`/verify-email?email=${encodeURIComponent(email)}`)
   } catch {
     return { error: 'Something went wrong. Please try again.' }
   }

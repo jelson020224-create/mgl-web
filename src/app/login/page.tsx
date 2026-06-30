@@ -12,6 +12,7 @@ function LoginFormInner() {
   const [state, formAction, pending] = useActionState(clientLogin, initialState)
   const searchParams = useSearchParams()
   const registered = searchParams.get('registered')
+  const verified = searchParams.get('verified')
   const oauthError = searchParams.get('error')
 
   return (
@@ -29,6 +30,11 @@ function LoginFormInner() {
           {registered && (
             <div className="mb-4 px-4 py-3 rounded-lg bg-emerald-50 border border-emerald-200 text-sm text-emerald-700 text-center">
               Account created. Please sign in.
+            </div>
+          )}
+          {verified && (
+            <div className="mb-4 px-4 py-3 rounded-lg bg-emerald-50 border border-emerald-200 text-sm text-emerald-700 text-center">
+              Email verified. Please sign in.
             </div>
           )}
           {oauthError && (
