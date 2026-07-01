@@ -1,9 +1,8 @@
-import { getSiteSettings, getTeamMembers, getApproachSteps } from '@/lib/queries'
+import { getSiteSettings, getApproachSteps } from '@/lib/queries'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
 
 export default async function AboutPage() {
   const settings = await getSiteSettings()
-  const team = await getTeamMembers()
   const steps = await getApproachSteps()
 
   return (
@@ -22,35 +21,6 @@ export default async function AboutPage() {
             <div className="text-lg text-gray-light/70 max-w-3xl mx-auto font-light"
               dangerouslySetInnerHTML={{ __html: settings.about_content || '<p>We are a full-service construction and interior design firm built on craftsmanship, creativity, and collaboration.</p>' }} />
           </AnimateOnScroll>
-        </div>
-      </section>
-
-      <section className="section bg-mesh relative">
-        <div className="section-container relative">
-          <AnimateOnScroll type="fade-up">
-            <div className="section-header">
-              <span className="section-eyebrow">Our People</span>
-              <h2 className="section-title">The Team</h2>
-              <div className="divider-dash justify-center mb-4">
-                <span className="divider-dash-dot" />
-              </div>
-              <p className="section-subtitle">Experts in every discipline, working as one</p>
-            </div>
-          </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[clamp(1rem,2vw,1.5rem)]">
-              {team.map((m, i) => (
-              <AnimateOnScroll key={m.id} type="fade-up" delay={i * 80}>
-                <div className="card-modern shadow-soft p-8 text-center group h-full relative overflow-hidden">
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-terracotta to-terracotta-light scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                  <div className="w-16 h-16 rounded-2xl bg-terracotta-50 flex items-center justify-center mx-auto mb-5 text-3xl group-hover:bg-terracotta group-hover:text-white transition-all duration-300">
-                    {m.icon}
-                  </div>
-                  <h3 className="text-lg font-bold text-warm-gray mb-3">{m.title}</h3>
-                  <p className="text-sm text-gray-dark leading-relaxed">{m.description}</p>
-                </div>
-              </AnimateOnScroll>
-            ))}
-          </div>
         </div>
       </section>
 
