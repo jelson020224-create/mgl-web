@@ -25,11 +25,23 @@ export async function POST(req: Request) {
 
   try {
     const formData = await req.formData()
-    const file = formData.get('file') as File
+    console.error('formData keys:', Array.from(formData.keys()))
+    const file = formData.get('file')
+    console.error('file type:', typeof file, file?.constructor?.name)
     if (!file) return Response.json({ error: 'No file provided' }, { status: 400 })
 
-    const raw = Buffer.from(await file.arrayBuffer())
-    const originalName = file.name.replace(/[^a-zA-Z0-9._-]/g, '')
+    let raw: Buffer
+    try {
+      const ab = await (file as File).arrayBuffer()
+      console.error('arrayBuffer size:', ab.byteLength)
+      raw = Buffer.from(new Uint8Array(ab))
+      console.error('buffer size:', raw.length)
+    } catch (e1) {
+      console.error('buffer step failed:', e1)
+      return Response.json({ error: 'Buffer conversion failed' }, { status: 500 })
+    }
+
+    const originalName = (file as File).name.replace(/[^a-zA-Z0-9._-]/g, '')
     const filename = `${Date.now()}-${originalName}`
 
     let finalBuffer: Buffer = raw
@@ -37,15 +49,25 @@ export async function POST(req: Request) {
     try {
       finalBuffer = await sharp(raw).webp({ quality: 80 }).toBuffer()
       finalFilename = filename.replace(/\.\w+$/, '.webp')
-    } catch {
-      // fallback to original
+      console.error('sharp converted to webp:', finalFilename)
+    } catch (e2) {
+      console.error('sharp failed, using original:', e2)
     }
 
     const alt = (formData.get('alt') as string) || finalFilename
     const useBlob = !!process.env.VERCEL && !!process.env.BLOB_READ_WRITE_TOKEN
-    const url = useBlob
-      ? await blobUpload(finalBuffer, finalFilename)
-      : await localUpload(finalBuffer, finalFilename)
+    console.error('useBlob:', useBlob, 'VERCEL:', !!process.env.VERCEL, 'BLOB_TOKEN:', !!process.env.BLOB_READ_WRITE_TOKEN)
+
+    let url: string
+    try {
+      url = useBlob
+        ? await blobUpload(finalBuffer, finalFilename)
+        : await localUpload(finalBuffer, finalFilename)
+      console.error('upload success, url:', url?.slice(0, 60))
+    } catch (e3) {
+      console.error('upload step failed:', e3)
+      return Response.json({ error: 'Storage upload failed' }, { status: 500 })
+    }
 
     const image = await prisma.uploadedImage.create({
       data: { filename: finalFilename, url, alt },
@@ -53,7 +75,7 @@ export async function POST(req: Request) {
 
     return Response.json({ success: true, url: image.url, image })
   } catch (e) {
-    console.error('Upload error:', e)
+    console.error('Upload outer error:', e)
     return Response.json({ error: 'Upload failed' }, { status: 500 })
   }
 }
