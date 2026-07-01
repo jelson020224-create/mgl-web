@@ -6,7 +6,7 @@ import AnimateOnScroll from '@/components/AnimateOnScroll'
 async function getServices() {
   return prisma.service.findMany({
     orderBy: { order: 'asc' },
-    include: { samples: { orderBy: { order: 'asc' }, take: 3 } },
+    include: { samples: { orderBy: { order: 'asc' }, take: 3 }, _count: { select: { samples: true } } },
   })
 }
 
@@ -60,7 +60,7 @@ export default async function ServicesPage() {
                           </div>
                         )}
                         <div className="flex items-center gap-3 mt-4">
-                          <span className="text-xs text-gray">{s.samples.length} sample{s.samples.length !== 1 ? 's' : ''}</span>
+                          <span className="text-xs text-gray">{s._count.samples} sample{s._count.samples !== 1 ? 's' : ''}</span>
                           <span className="inline-flex items-center gap-1 text-xs text-terracotta font-medium opacity-0 group-hover:opacity-100 transition-all duration-300">
                             View details
                             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
