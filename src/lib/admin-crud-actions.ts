@@ -116,10 +116,15 @@ export async function addPortfolioItem(prevState: { error: string; success: stri
     const category = formData.get('category') as string
     const description = formData.get('description') as string
     const imageUrl = formData.get('imageUrl') as string
+    const videoUrl = formData.get('videoUrl') as string || null
+    const videoCaption = formData.get('videoCaption') as string || null
 
     if (!title) return { error: 'Title is required.', success: '' }
 
-    await prisma.portfolioItem.create({ data: { title, category, description, imageUrl: imageUrl || '/placeholder.jpg' } })
+    await prisma.portfolioItem.create({
+      data: { title, category, description, imageUrl: imageUrl || '/placeholder.jpg', videoUrl, videoCaption },
+    })
+    revalidatePath('/admin/edit/portfolio')
     revalidatePath('/admin/portfolio')
     return { error: '', success: 'Portfolio item added.' }
   } catch {
@@ -131,8 +136,9 @@ export async function deletePortfolioItem(id: number) {
   try {
     await prisma.portfolioItem.delete({ where: { id } })
     revalidatePath('/admin/portfolio')
-  } catch {
-    return { error: 'Failed to delete portfolio item.', success: '' }
+    revalidatePath('/admin/edit/portfolio')
+  } catch (e) {
+    console.error('Failed to delete portfolio item:', e)
   }
 }
 
@@ -208,5 +214,19 @@ export async function deleteApproachStep(id: number) {
     revalidatePath('/admin/approach')
   } catch {
     return { error: 'Failed to delete approach step.', success: '' }
+  }
+}
+
+export async function addServiceSample(serviceId: number, imageUrl: string) {
+  'use server'
+  try {
+    await prisma.serviceSample.create({
+      data: { serviceId, imageUrl, order: 0 },
+    })
+    revalidatePath(`/admin/services/${serviceId}/samples`)
+    revalidatePath('/admin/edit/services')
+    return { success: true }
+  } catch {
+    return { error: 'Failed to add sample' }
   }
 }

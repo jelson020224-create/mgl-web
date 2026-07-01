@@ -51,6 +51,8 @@ CREATE TABLE "PortfolioItem" (
     "category" TEXT NOT NULL,
     "imageUrl" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "videoUrl" TEXT,
+    "videoCaption" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "PortfolioItem_pkey" PRIMARY KEY ("id")

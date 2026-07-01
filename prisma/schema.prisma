@@ -43,12 +43,14 @@ model ServiceSample {
 }
 
 model PortfolioItem {
-  id          Int      @id @default(autoincrement())
-  title       String
-  category    String
-  imageUrl    String
-  description String
-  createdAt   DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  title        String
+  category     String
+  imageUrl     String
+  description  String
+  videoUrl     String?
+  videoCaption String?
+  createdAt    DateTime @default(now())
 }
 
 model Testimonial {
