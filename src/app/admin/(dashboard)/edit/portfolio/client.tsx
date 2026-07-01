@@ -57,7 +57,7 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
         if (!vi) { setToast('Invalid YouTube URL'); setFetchingCaption(false); return }
         url = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${vi}&format=json`
       } else {
-        url = `https://www.facebook.com/plugins/video/oembed.json/?url=${encodeURIComponent(videoUrl)}`
+        url = `/api/oembed/facebook?url=${encodeURIComponent(videoUrl)}`
       }
       const res = await fetch(url)
       const data = await res.json()
