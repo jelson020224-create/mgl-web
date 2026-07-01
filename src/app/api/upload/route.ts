@@ -51,7 +51,7 @@ export async function POST(req: Request) {
       data: { filename: finalFilename, url, alt },
     })
 
-    return Response.json({ success: true, image })
+    return Response.json({ success: true, url: image.url, image })
   } catch (e) {
     console.error('Upload error:', e)
     return Response.json({ error: 'Upload failed' }, { status: 500 })
