@@ -9,7 +9,11 @@ function youtubeEmbedUrl(url: string): string | null {
 }
 
 function facebookEmbedUrl(url: string): string {
-  return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&width=600`
+  const reelMatch = url.match(/facebook\.com\/share\/r\/([^\/?#]+)/)
+  const href = reelMatch
+    ? `https://www.facebook.com/reel/${reelMatch[1]}`
+    : url
+  return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(href)}&show_text=false&width=600`
 }
 
 async function getPortfolio() {
