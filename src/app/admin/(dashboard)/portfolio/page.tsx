@@ -18,7 +18,10 @@ export default async function AdminPortfolioPage() {
             <div key={p.id} className="card-modern shadow-soft p-4 flex items-center gap-4">
               <div className="w-16 h-16 bg-gray-light rounded-lg flex items-center justify-center text-gray text-sm shrink-0">📷</div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-black text-sm">{p.title}</h3>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-bold text-black text-sm">{p.title}</h3>
+                  {p.type === 'video' && <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">Video</span>}
+                </div>
                 <span className="text-xs text-orange">{p.category}</span>
               </div>
               <form action={async () => {

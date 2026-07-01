@@ -112,20 +112,22 @@ export async function deleteService(id: number) {
 
 export async function addPortfolioItem(prevState: { error: string; success: string }, formData: FormData) {
   try {
+    const type = formData.get('type') as string || 'image'
     const title = formData.get('title') as string
     const category = formData.get('category') as string
     const description = formData.get('description') as string
-    const imageUrl = formData.get('imageUrl') as string
-    const videoUrl = formData.get('videoUrl') as string || null
-    const videoCaption = formData.get('videoCaption') as string || null
+    const imageUrl = type === 'image' ? (formData.get('imageUrl') as string) : '/placeholder.jpg'
+    const videoUrl = type === 'video' ? (formData.get('videoUrl') as string || null) : null
+    const videoCaption = type === 'video' ? (formData.get('videoCaption') as string || null) : null
 
     if (!title) return { error: 'Title is required.', success: '' }
 
     await prisma.portfolioItem.create({
-      data: { title, category, description, imageUrl: imageUrl || '/placeholder.jpg', videoUrl, videoCaption },
+      data: { type, title, category, description, imageUrl: imageUrl || '/placeholder.jpg', videoUrl, videoCaption },
     })
     revalidatePath('/admin/edit/portfolio')
     revalidatePath('/admin/portfolio')
+    revalidatePath('/portfolio')
     return { error: '', success: 'Portfolio item added.' }
   } catch {
     return { error: 'Failed to add portfolio item.', success: '' }
@@ -137,6 +139,7 @@ export async function deletePortfolioItem(id: number) {
     await prisma.portfolioItem.delete({ where: { id } })
     revalidatePath('/admin/portfolio')
     revalidatePath('/admin/edit/portfolio')
+    revalidatePath('/portfolio')
   } catch (e) {
     console.error('Failed to delete portfolio item:', e)
   }
