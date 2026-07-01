@@ -19,29 +19,34 @@ async function blobUpload(source: Buffer, filename: string) {
   return url
 }
 
+async function fileToBuffer(file: File): Promise<Buffer> {
+  const chunks: Uint8Array[] = []
+  const reader = file.stream().getReader()
+  while (true) {
+    const { done, value } = await reader.read()
+    if (done) break
+    chunks.push(value)
+  }
+  return Buffer.concat(chunks)
+}
+
 export async function POST(req: Request) {
   const session = await getSession()
   if (!session) return Response.json({ error: 'Unauthorized' }, { status: 401 })
 
   try {
     const formData = await req.formData()
-    console.error('formData keys:', Array.from(formData.keys()))
-    const file = formData.get('file')
-    console.error('file type:', typeof file, file?.constructor?.name)
+    const file = formData.get('file') as File | null
     if (!file) return Response.json({ error: 'No file provided' }, { status: 400 })
 
     let raw: Buffer
     try {
-      const ab = await (file as File).arrayBuffer()
-      console.error('arrayBuffer size:', ab.byteLength)
-      raw = Buffer.from(new Uint8Array(ab))
-      console.error('buffer size:', raw.length)
-    } catch (e1) {
-      console.error('buffer step failed:', e1)
-      return Response.json({ error: 'Buffer conversion failed' }, { status: 500 })
+      raw = await fileToBuffer(file)
+    } catch {
+      return Response.json({ error: 'Failed to read file' }, { status: 500 })
     }
 
-    const originalName = (file as File).name.replace(/[^a-zA-Z0-9._-]/g, '')
+    const originalName = file.name.replace(/[^a-zA-Z0-9._-]/g, '')
     const filename = `${Date.now()}-${originalName}`
 
     let finalBuffer: Buffer = raw
@@ -49,23 +54,19 @@ export async function POST(req: Request) {
     try {
       finalBuffer = await sharp(raw).webp({ quality: 80 }).toBuffer()
       finalFilename = filename.replace(/\.\w+$/, '.webp')
-      console.error('sharp converted to webp:', finalFilename)
-    } catch (e2) {
-      console.error('sharp failed, using original:', e2)
+    } catch {
+      // fallback to original
     }
 
     const alt = (formData.get('alt') as string) || finalFilename
     const useBlob = !!process.env.VERCEL && !!process.env.BLOB_READ_WRITE_TOKEN
-    console.error('useBlob:', useBlob, 'VERCEL:', !!process.env.VERCEL, 'BLOB_TOKEN:', !!process.env.BLOB_READ_WRITE_TOKEN)
 
     let url: string
     try {
       url = useBlob
         ? await blobUpload(finalBuffer, finalFilename)
         : await localUpload(finalBuffer, finalFilename)
-      console.error('upload success, url:', url?.slice(0, 60))
-    } catch (e3) {
-      console.error('upload step failed:', e3)
+    } catch {
       return Response.json({ error: 'Storage upload failed' }, { status: 500 })
     }
 
@@ -74,8 +75,7 @@ export async function POST(req: Request) {
     })
 
     return Response.json({ success: true, url: image.url, image })
-  } catch (e) {
-    console.error('Upload outer error:', e)
+  } catch {
     return Response.json({ error: 'Upload failed' }, { status: 500 })
   }
 }
