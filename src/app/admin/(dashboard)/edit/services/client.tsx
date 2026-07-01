@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { addServiceSample } from '@/lib/admin-crud-actions'
+import { addServiceSample } from '@/lib/add-sample-action'
 
 interface ServiceWithSampleCount {
   id: number
