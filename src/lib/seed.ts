@@ -21,8 +21,7 @@ export async function seedAdmin() {
       { title: 'Interior Design', description: 'Complete interior fit-out including spatial planning, finishes, furniture, and lighting.', icon: '🪑', order: 2 },
       { title: 'Drafting Services', description: 'Professional CAD drafting, permit sets, and construction documentation.', icon: '📐', order: 3 },
       { title: 'Renovation & Remodeling', description: 'Full or partial home renovations — kitchens, bathrooms, basements, and more.', icon: '🔨', order: 4 },
-      { title: 'Structural Engineering', description: 'Structural analysis, foundation design, and engineering certifications.', icon: '🏗️', order: 5 },
-      { title: 'Project Management', description: 'End-to-end project oversight from concept to completion — on time and on budget.', icon: '📋', order: 6 },
+      { title: 'Project Management', description: 'End-to-end project oversight from concept to completion — on time and on budget.', icon: '📋', order: 5 },
     ],
   })
 
