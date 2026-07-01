@@ -15,7 +15,8 @@ async function localUpload(source: Buffer, filename: string) {
 async function blobUpload(source: Buffer, filename: string) {
   const { put } = await import('@vercel/blob')
   const finalFilename = filename.replace(/\.\w+$/, '.webp')
-  const { url } = await put(finalFilename, source, { access: 'public' })
+  const body = new Blob([new Uint8Array(source)], { type: 'image/webp' })
+  const { url } = await put(finalFilename, body, { access: 'public' })
   return url
 }
 
