@@ -42,7 +42,8 @@ export async function POST(req: Request) {
     let raw: Buffer
     try {
       raw = await fileToBuffer(file)
-    } catch {
+    } catch (e) {
+      console.error('fileToBuffer error:', e)
       return Response.json({ error: 'Failed to read file' }, { status: 500 })
     }
 
@@ -54,8 +55,8 @@ export async function POST(req: Request) {
     try {
       finalBuffer = await sharp(raw).webp({ quality: 80 }).toBuffer()
       finalFilename = filename.replace(/\.\w+$/, '.webp')
-    } catch {
-      // fallback to original
+    } catch (e) {
+      console.error('sharp conversion error:', e)
     }
 
     const alt = (formData.get('alt') as string) || finalFilename
@@ -66,7 +67,8 @@ export async function POST(req: Request) {
       url = useBlob
         ? await blobUpload(finalBuffer, finalFilename)
         : await localUpload(finalBuffer, finalFilename)
-    } catch {
+    } catch (e) {
+      console.error('storage upload error:', e)
       return Response.json({ error: 'Storage upload failed' }, { status: 500 })
     }
 
@@ -75,7 +77,8 @@ export async function POST(req: Request) {
     })
 
     return Response.json({ success: true, url: image.url, image })
-  } catch {
+  } catch (e) {
+    console.error('Upload error:', e)
     return Response.json({ error: 'Upload failed' }, { status: 500 })
   }
 }
