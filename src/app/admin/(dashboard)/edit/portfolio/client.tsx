@@ -27,6 +27,7 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
   const [videoUrl, setVideoUrl] = useState('')
   const [videoCaption, setVideoCaption] = useState('')
   const [fetchingCaption, setFetchingCaption] = useState(false)
+  const [converting, setConverting] = useState(false)
   const [toast, setToast] = useState<string | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
 
@@ -71,6 +72,27 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
       setToast('Failed to fetch caption')
     } finally {
       setFetchingCaption(false)
+    }
+  }
+
+  async function handleConvertReel() {
+    if (!videoUrl) return
+    setConverting(true)
+    setToast('Converting Reel to MP4...')
+    try {
+      const res = await fetch('/api/convert-reel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: videoUrl }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.url) throw new Error(data.error || 'Conversion failed')
+      setImageUrl(data.url)
+      setToast('Converted & uploaded!')
+    } catch (e: any) {
+      setToast(e.message || 'Conversion failed')
+    } finally {
+      setConverting(false)
     }
   }
 
@@ -186,6 +208,19 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
                     </button>
                   </div>
                 </div>
+                {videoPlatform === 'facebook' && /facebook\.com\/(share\/r\/|reel\/)/.test(videoUrl) && (
+                  <div>
+                    <button
+                      type="button"
+                      onClick={handleConvertReel}
+                      disabled={!videoUrl || converting}
+                      className="btn btn-primary w-full justify-center text-sm disabled:opacity-50"
+                    >
+                      {converting ? 'Converting...' : 'Convert Reel to MP4 & Upload'}
+                    </button>
+                    {imageUrl && <p className="text-xs text-green-600 mt-1">MP4 uploaded: {imageUrl.slice(0, 50)}...</p>}
+                  </div>
+                )}
               </>
             )}
 
