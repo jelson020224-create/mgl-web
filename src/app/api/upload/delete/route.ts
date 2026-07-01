@@ -15,8 +15,15 @@ export async function POST(req: Request) {
 
   const image = await prisma.uploadedImage.findUnique({ where: { id } })
   if (image) {
-    const filePath = join(process.cwd(), 'public', image.url)
-    try { await unlink(filePath) } catch {}
+    if (process.env.VERCEL) {
+      try {
+        const { del } = await import('@vercel/blob')
+        await del(image.url)
+      } catch {}
+    } else {
+      const filePath = join(process.cwd(), 'public', image.url)
+      try { await unlink(filePath) } catch {}
+    }
     await prisma.uploadedImage.delete({ where: { id } })
   }
 
