@@ -8,12 +8,15 @@ function youtubeEmbedUrl(url: string): string | null {
   return m ? `https://www.youtube-nocookie.com/embed/${m[1]}` : null
 }
 
-function facebookEmbedUrl(url: string): string {
-  const reelMatch = url.match(/facebook\.com\/share\/r\/([^\/?#]+)/)
-  const href = reelMatch
-    ? `https://www.facebook.com/reel/${reelMatch[1]}`
-    : url
-  return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(href)}&show_text=false&width=600`
+function facebookEmbedUrl(url: string): string | null {
+  const isReel = /facebook\.com\/(share\/r\/|reel\/)/.test(url)
+  if (isReel) return null
+  return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&width=600`
+}
+
+function facebookReelUrl(url: string): string | null {
+  const m = url.match(/facebook\.com\/(?:share\/r\/|reel\/)([^\/?#]+)/)
+  return m ? `https://www.facebook.com/reel/${m[1]}` : null
 }
 
 async function getPortfolio() {
@@ -60,6 +63,7 @@ export default async function PortfolioPage() {
               {items.map((p, i) => {
                 const ytSrc = p.type === 'video' && p.videoPlatform === 'youtube' && p.videoUrl ? youtubeEmbedUrl(p.videoUrl) : null
                 const fbSrc = p.type === 'video' && p.videoPlatform === 'facebook' && p.videoUrl ? facebookEmbedUrl(p.videoUrl) : null
+                const reelUrl = p.type === 'video' && p.videoPlatform === 'facebook' && p.videoUrl ? facebookReelUrl(p.videoUrl) : null
 
                 return (
                   <AnimateOnScroll key={p.id} type="scale-in" delay={i * 80}>
@@ -84,6 +88,13 @@ export default async function PortfolioPage() {
                             loading="lazy"
                           />
                         </div>
+                      ) : reelUrl ? (
+                        <a href={reelUrl} target="_blank" rel="noopener noreferrer" className="block aspect-[4/3] overflow-hidden bg-gradient-to-br from-blue-600 to-purple-700 group/link">
+                          <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-white">
+                            <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M9.525 8.772V15.228L15 12L9.525 8.772ZM22 12C22 6.477 17.523 2 12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12ZM20 12C20 16.418 16.418 20 12 20C7.582 20 4 16.418 4 12C4 7.582 7.582 4 12 4C16.418 4 20 7.582 20 12Z" /></svg>
+                            <span className="text-xs font-semibold opacity-80 group-hover/link:opacity-100 transition-opacity">Watch on Facebook</span>
+                          </div>
+                        </a>
                       ) : (
                         <div className="aspect-[4/3] overflow-hidden bg-gray-light">
                           {p.imageUrl && p.imageUrl !== '/placeholder.jpg' ? (
