@@ -1,9 +1,8 @@
-import { getSiteSettings, getApproachSteps } from '@/lib/queries'
+import { getSiteSettings } from '@/lib/queries'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
 
 export default async function AboutPage() {
   const settings = await getSiteSettings()
-  const steps = await getApproachSteps()
 
   return (
     <>
@@ -21,35 +20,6 @@ export default async function AboutPage() {
             <div className="text-lg text-gray-light/70 max-w-3xl mx-auto font-light"
               dangerouslySetInnerHTML={{ __html: settings.about_content || '<p>We are a full-service construction and interior design firm built on craftsmanship, creativity, and collaboration.</p>' }} />
           </AnimateOnScroll>
-        </div>
-      </section>
-
-      <section className="section bg-white relative">
-        <div className="absolute inset-0 pattern-dots opacity-[0.12]" />
-        <div className="section-container relative">
-          <AnimateOnScroll type="fade-up">
-            <div className="section-header">
-              <span className="section-eyebrow">How We Work</span>
-              <h2 className="section-title">Our Approach</h2>
-              <div className="divider-dash justify-center mb-4">
-                <span className="divider-dash-dot" />
-              </div>
-              <p className="section-subtitle">A streamlined process from idea to completion</p>
-            </div>
-          </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-[clamp(1.5rem,3vw,3rem)] mt-4">
-            {steps.map((s, i) => (
-              <AnimateOnScroll key={s.id} type="fade-up" delay={i * 100}>
-                <div className="text-center group">
-                  <div className="w-16 h-16 rounded-2xl bg-terracotta-50 flex items-center justify-center mx-auto mb-4 group-hover:bg-terracotta group-hover:text-white transition-all duration-300">
-                    <span className="text-lg font-bold font-serif">{s.step}</span>
-                  </div>
-                  <div className="text-lg font-bold text-warm-gray">{s.title}</div>
-                  <div className="w-8 h-0.5 bg-terracotta/30 mx-auto mt-3 group-hover:w-12 transition-all duration-300" />
-                </div>
-              </AnimateOnScroll>
-            ))}
-          </div>
         </div>
       </section>
 
