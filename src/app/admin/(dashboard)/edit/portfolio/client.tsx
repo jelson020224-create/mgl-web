@@ -13,6 +13,7 @@ interface PortfolioItem {
   description: string
   imageUrl: string
   videoUrl: string | null
+  videoPlatform: string | null
   videoCaption: string | null
   createdAt: Date
 }
@@ -20,6 +21,7 @@ interface PortfolioItem {
 export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) {
   const [state, formAction, pending] = useActionState(addPortfolioItem, initialState)
   const [type, setType] = useState<'image' | 'video'>('image')
+  const [videoPlatform, setVideoPlatform] = useState<'facebook' | 'youtube'>('facebook')
   const [imageUrl, setImageUrl] = useState('')
   const [uploading, setUploading] = useState(false)
   const [videoUrl, setVideoUrl] = useState('')
@@ -49,7 +51,15 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
     if (!videoUrl) return
     setFetchingCaption(true)
     try {
-      const res = await fetch(`https://www.facebook.com/plugins/video/oembed.json/?url=${encodeURIComponent(videoUrl)}`)
+      let url: string
+      if (videoPlatform === 'youtube') {
+        const vi = extractYoutubeId(videoUrl)
+        if (!vi) { setToast('Invalid YouTube URL'); setFetchingCaption(false); return }
+        url = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${vi}&format=json`
+      } else {
+        url = `https://www.facebook.com/plugins/video/oembed.json/?url=${encodeURIComponent(videoUrl)}`
+      }
+      const res = await fetch(url)
       const data = await res.json()
       if (data.title) {
         setVideoCaption(data.title)
@@ -94,6 +104,22 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
               </div>
             </div>
 
+            {type === 'video' && (
+              <div>
+                <label className="block text-sm font-semibold text-black mb-2">Video Platform</label>
+                <div className="flex gap-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="videoPlatform" value="facebook" checked={videoPlatform === 'facebook'} onChange={() => setVideoPlatform('facebook')} className="accent-terracotta" />
+                    <span className="text-sm text-black">Facebook</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="videoPlatform" value="youtube" checked={videoPlatform === 'youtube'} onChange={() => { setVideoPlatform('youtube'); setVideoUrl(''); setVideoCaption('') }} className="accent-terracotta" />
+                    <span className="text-sm text-black">YouTube</span>
+                  </label>
+                </div>
+              </div>
+            )}
+
             <div>
               <label className="block text-sm font-semibold text-black mb-1">Title *</label>
               <input name="title" required className="w-full px-4 py-3 rounded-lg border border-gray/20 focus:outline-none focus:ring-2 focus:ring-orange" />
@@ -128,13 +154,15 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
             {type === 'video' && (
               <>
                 <div>
-                  <label className="block text-sm font-semibold text-black mb-1">Facebook Video URL</label>
+                  <label className="block text-sm font-semibold text-black mb-1">
+                    {videoPlatform === 'youtube' ? 'YouTube Video URL' : 'Facebook Video URL'}
+                  </label>
                   <input
                     type="url"
                     name="videoUrl"
                     value={videoUrl}
                     onChange={(e) => setVideoUrl(e.target.value)}
-                    placeholder="https://www.facebook.com/..."
+                    placeholder={videoPlatform === 'youtube' ? 'https://www.youtube.com/watch?v=...' : 'https://www.facebook.com/...'}
                     className="w-full px-4 py-3 rounded-lg border border-gray/20 focus:outline-none focus:ring-2 focus:ring-orange"
                   />
                 </div>
@@ -145,7 +173,7 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
                       name="videoCaption"
                       value={videoCaption}
                       onChange={(e) => setVideoCaption(e.target.value)}
-                      placeholder="Auto-fetched from FB or enter manually"
+                      placeholder="Auto-fetched or enter manually"
                       className="w-full px-4 py-3 rounded-lg border border-gray/20 focus:outline-none focus:ring-2 focus:ring-orange"
                     />
                     <button
@@ -173,7 +201,9 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
           {items.map((p) => (
             <div key={p.id} className="card-modern shadow-soft p-4 flex items-center gap-4">
               {p.type === 'video' ? (
-                <div className="w-24 h-20 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 text-sm shrink-0">▶ Video</div>
+                <div className="w-24 h-20 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 text-sm shrink-0">
+                  {p.videoPlatform === 'youtube' ? '▶ YouTube' : '▶ Video'}
+                </div>
               ) : p.imageUrl && p.imageUrl !== '/placeholder.jpg' ? (
                 <img src={p.imageUrl} alt={p.title} className="w-24 h-20 object-cover rounded shrink-0" />
               ) : (
@@ -183,7 +213,9 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
                 <div className="flex items-center gap-2">
                   <h3 className="font-bold text-black text-sm">{p.title}</h3>
                   {p.type === 'video' && (
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full shrink-0">Video</span>
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full shrink-0">
+                      {p.videoPlatform === 'youtube' ? 'YouTube' : 'Video'}
+                    </span>
                   )}
                 </div>
                 <span className="text-xs text-orange">{p.category}</span>
@@ -197,4 +229,17 @@ export function AdminEditPortfolioClient({ items }: { items: PortfolioItem[] }) 
       </div>
     </>
   )
+}
+
+function extractYoutubeId(url: string): string | null {
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+    /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
+    /youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/,
+  ]
+  for (const p of patterns) {
+    const m = url.match(p)
+    if (m) return m[1]
+  }
+  return null
 }

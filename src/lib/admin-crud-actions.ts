@@ -118,12 +118,13 @@ export async function addPortfolioItem(prevState: { error: string; success: stri
     const description = formData.get('description') as string
     const imageUrl = type === 'image' ? (formData.get('imageUrl') as string) : '/placeholder.jpg'
     const videoUrl = type === 'video' ? (formData.get('videoUrl') as string || null) : null
+    const videoPlatform = type === 'video' ? (formData.get('videoPlatform') as string || null) : null
     const videoCaption = type === 'video' ? (formData.get('videoCaption') as string || null) : null
 
     if (!title) return { error: 'Title is required.', success: '' }
 
     await prisma.portfolioItem.create({
-      data: { type, title, category, description, imageUrl: imageUrl || '/placeholder.jpg', videoUrl, videoCaption },
+      data: { type, title, category, description, imageUrl: imageUrl || '/placeholder.jpg', videoUrl, videoPlatform, videoCaption },
     })
     revalidatePath('/admin/edit/portfolio')
     revalidatePath('/admin/portfolio')

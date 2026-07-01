@@ -1,6 +1,16 @@
 import prisma from '@/lib/prisma'
 import { getSiteSettings } from '@/lib/queries'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
+import RequestProjectModal from '@/components/RequestProjectModal'
+
+function youtubeEmbedUrl(url: string): string | null {
+  const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/)
+  return m ? `https://www.youtube-nocookie.com/embed/${m[1]}` : null
+}
+
+function facebookEmbedUrl(url: string): string {
+  return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&width=600`
+}
 
 async function getPortfolio() {
   const items = await prisma.portfolioItem.findMany({ orderBy: { createdAt: 'desc' } })
@@ -43,41 +53,57 @@ export default async function PortfolioPage() {
 
           {items.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[clamp(1rem,2vw,1.5rem)]">
-              {items.map((p, i) => (
-                <AnimateOnScroll key={p.id} type="scale-in" delay={i * 80}>
-                  <div className="card-modern shadow-soft group overflow-hidden">
-                    {p.type === 'video' && p.videoUrl ? (
-                      <div className="aspect-[4/3] overflow-hidden bg-black">
-                        <iframe
-                          src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(p.videoUrl)}&show_text=false&width=600`}
-                          className="w-full h-full"
-                          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-                          allowFullScreen
-                          loading="lazy"
-                        />
+              {items.map((p, i) => {
+                const ytSrc = p.type === 'video' && p.videoPlatform === 'youtube' && p.videoUrl ? youtubeEmbedUrl(p.videoUrl) : null
+                const fbSrc = p.type === 'video' && p.videoPlatform === 'facebook' && p.videoUrl ? facebookEmbedUrl(p.videoUrl) : null
+
+                return (
+                  <AnimateOnScroll key={p.id} type="scale-in" delay={i * 80}>
+                    <div className="card-modern shadow-soft group overflow-hidden">
+                      {ytSrc ? (
+                        <div className="aspect-[4/3] overflow-hidden bg-black">
+                          <iframe
+                            src={ytSrc}
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : fbSrc ? (
+                        <div className="aspect-[4/3] overflow-hidden bg-black">
+                          <iframe
+                            src={fbSrc}
+                            className="w-full h-full"
+                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+                            allowFullScreen
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <div className="aspect-[4/3] overflow-hidden bg-gray-light">
+                          {p.imageUrl && p.imageUrl !== '/placeholder.jpg' ? (
+                            <img src={p.imageUrl} alt={p.title} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:rotate-[0.5deg]" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <svg className="w-12 h-12 text-gray/30" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+                              </svg>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      <div className="p-5 relative">
+                        <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-terracotta/30 to-transparent" />
+                        <span className="badge badge-terracotta text-[10px] uppercase tracking-widest font-semibold">{p.category}</span>
+                        <h3 className="text-base font-bold text-warm-gray mt-2.5 mb-1">{p.title}</h3>
+                        {p.description && <p className="text-xs text-gray-dark leading-relaxed">{p.description}</p>}
+                        <RequestProjectModal projectTitle={p.title} />
                       </div>
-                    ) : (
-                      <div className="aspect-[4/3] overflow-hidden bg-gray-light">
-                        {p.imageUrl && p.imageUrl !== '/placeholder.jpg' ? (
-                          <img src={p.imageUrl} alt={p.title} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:rotate-[0.5deg]" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <svg className="w-12 h-12 text-gray/30" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
-                            </svg>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                    <div className="p-5 relative">
-                      <div className="absolute top-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-terracotta/30 to-transparent" />
-                      <span className="badge badge-terracotta text-[10px] uppercase tracking-widest font-semibold">{p.category}</span>
-                      <h3 className="text-base font-bold text-warm-gray mt-2.5 mb-1">{p.title}</h3>
-                      {p.description && <p className="text-xs text-gray-dark leading-relaxed">{p.description}</p>}
                     </div>
-                  </div>
-                </AnimateOnScroll>
-              ))}
+                  </AnimateOnScroll>
+                )
+              })}
             </div>
           ) : (
             <div className="card-modern shadow-soft p-16 text-center">
